@@ -51,6 +51,12 @@ export default function SceneCanvas() {
         rotation={[degToRad(-90), degToRad(3), -0.2]}
         scale={1.2}
       />
+      <Prop
+        url="/models/ModularDungeons/CoinBag.glb"
+        position={[2.5, 0.98, 1.4]}
+        rotation={[degToRad(0), degToRad(0), 0]}
+        scale={2}
+      />
 
       {/* <Wall start={[-20, 0, -20]} direction="x" length={20} height={4} />
 
