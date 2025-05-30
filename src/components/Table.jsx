@@ -1,4 +1,3 @@
-// Table.jsx
 import { useGLTF } from "@react-three/drei";
 import { useMemo } from "react";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils";
