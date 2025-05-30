@@ -1,10 +1,11 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stats } from "@react-three/drei";
 import FloorGrid from "./FloorGrid";
-import Table from "./Table";
+import Prop from "./Prop";
 // import Wall from "./Wall";
 
 export default function SceneCanvas() {
+  const degToRad = (deg) => (deg * Math.PI) / 180;
   return (
     <Canvas
       camera={{ position: [20, 20, 20], fov: 50 }}
@@ -38,7 +39,18 @@ export default function SceneCanvas() {
         scale={1}
       />
 
-      <Table position={[4, 0, 2]} rotation={Math.PI / 2} scale={1.2} />
+      <Prop
+        url="/models/ModularDungeons/TableBig.glb"
+        position={[4, 0, 2]}
+        rotation={[degToRad(0), degToRad(90), 0]}
+        scale={1.2}
+      />
+      <Prop
+        url="/models/ModularDungeons/Scroll.glb"
+        position={[3, 1.04, 2.2]}
+        rotation={[degToRad(-90), degToRad(3), -0.2]}
+        scale={1.2}
+      />
 
       {/* <Wall start={[-20, 0, -20]} direction="x" length={20} height={4} />
 
