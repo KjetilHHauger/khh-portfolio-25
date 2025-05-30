@@ -10,7 +10,9 @@ export default function FloorGrid({
   const createTile = (x, z) => {
     const model = clone(scene);
 
-    // Color
+    {
+      /* Color */
+    }
     model.traverse((child) => {
       if (child.isMesh) {
         child.material = new MeshStandardMaterial({ color: "gray" });

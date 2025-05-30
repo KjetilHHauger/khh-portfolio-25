@@ -8,7 +8,7 @@ export default function Floor({ url, ...props }) {
   useEffect(() => {
     scene.traverse((child) => {
       if (child.isMesh) {
-        child.material = new MeshStandardMaterial({ color: "gray" });
+        child.material = new MeshStandardMaterial({ color: "slategray" });
       }
     });
   }, [scene]);

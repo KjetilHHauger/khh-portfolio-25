@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stats } from "@react-three/drei";
 import FloorGrid from "./FloorGrid";
+// import Wall from "./Wall";
 
 export default function SceneCanvas() {
   return (
@@ -34,6 +35,9 @@ export default function SceneCanvas() {
         position={[0, 0, 0]}
         scale={1}
       />
+      {/* <Wall start={[-20, 0, -20]} direction="x" length={20} height={4} />
+
+      <Wall start={[-20, 0, -20]} direction="z" length={20} height={4} /> */}
     </Canvas>
   );
 }
