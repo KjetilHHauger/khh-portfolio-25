@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 19.55">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 7px;
+      }
+
+      .cls-1, .cls-2 {
+        font-family: Norse-Bold, Norse;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        font-size: 41.69px;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(11.21 12.31)"><tspan x="0" y="0">K</tspan></text>
+  <text class="cls-1" transform="translate(29.21 12.31)"><tspan x="0" y="0">H</tspan></text>
+  <text class="cls-2" transform="translate(6.84 0) rotate(90)"><tspan x="0" y="0">H</tspan></text>
+</svg>
