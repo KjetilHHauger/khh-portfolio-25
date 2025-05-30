@@ -3,6 +3,7 @@ import { OrbitControls, Stats } from "@react-three/drei";
 import FloorGrid from "./FloorGrid";
 import Prop from "./Prop";
 import InteractivePropScroll from "./interactive/InteractivePropScroll";
+import { Text } from "@react-three/drei";
 // import Wall from "./Wall";
 
 export default function SceneCanvas() {
@@ -81,7 +82,18 @@ export default function SceneCanvas() {
               </p>
             </div>
           }
-        />
+        >
+          <Text
+            position={[0, 0, 0]}
+            rotation={[degToRad(0), 0, 0]}
+            fontSize={0.15}
+            color="black"
+            anchorX="center"
+            anchorY="middle"
+          >
+            CV
+          </Text>
+        </InteractivePropScroll>
 
         <Prop
           url="/models/ModularDungeons/CoinBag.glb"

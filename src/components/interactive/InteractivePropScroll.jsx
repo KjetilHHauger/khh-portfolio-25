@@ -14,6 +14,7 @@ export default function InteractivePropScroll({
   focusScale = 10,
   color,
   content,
+  children,
 }) {
   const { scene } = useGLTF(url);
   const cloned = useMemo(() => clone(scene), [scene]);
@@ -43,6 +44,7 @@ export default function InteractivePropScroll({
   return (
     <animated.group position={pos} rotation={rot} scale={scl}>
       <primitive object={cloned} onClick={() => setFocused(!focused)} />
+      {!focused && children}
 
       {focused && (
         <Html lang="en" transform occlude distanceFactor={0.5}>
