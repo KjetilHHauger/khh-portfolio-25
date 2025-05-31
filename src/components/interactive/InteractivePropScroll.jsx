@@ -47,17 +47,18 @@ export default function InteractivePropScroll({
       {!focused && children}
 
       {focused && (
-        <Html lang="en" transform occlude distanceFactor={0.5}>
-          <div
-            style={{
-              background: "none",
-              padding: "1rem 2rem",
-            }}
-          >
+        <Html
+          lang="en"
+          transform
+          occlude
+          distanceFactor={0.5}
+          position={[0, 0.05, 0]}
+        >
+          <div className=" p-4 rounded w-[450px] h-[400px]  text-black hover:text-gray-600">
             {content}
             <button
+              className="mt-4 px-2 py-1 "
               onClick={() => setFocused(false)}
-              style={{ marginTop: "1rem" }}
             >
               Close
             </button>
