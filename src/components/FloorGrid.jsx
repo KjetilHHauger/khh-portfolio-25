@@ -3,10 +3,7 @@ import { clone } from "three/examples/jsm/utils/SkeletonUtils";
 import { MeshStandardMaterial } from "three";
 import { useMemo } from "react";
 
-export default function FloorGrid({
-  url = "/models/FloorTile.glb",
-  color = "#424242",
-}) {
+export default function FloorGrid({ url = "/models/FloorTile.glb", color }) {
   const { scene } = useGLTF(url);
 
   const floors = useMemo(() => {
@@ -21,7 +18,9 @@ export default function FloorGrid({
 
         model.traverse((child) => {
           if (child.isMesh) {
-            child.material = new MeshStandardMaterial({ color });
+            if (color) {
+              child.material = new MeshStandardMaterial({ color });
+            }
             child.castShadow = true;
             child.receiveShadow = true;
           }

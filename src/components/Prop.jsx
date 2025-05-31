@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useMemo, useEffect } from "react";
-import { MeshStandardMaterial } from "three";
+import { MeshStandardMaterial, MathUtils } from "three";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils";
 
 export default function Prop({
@@ -11,16 +11,14 @@ export default function Prop({
   color,
 }) {
   const { scene } = useGLTF(url);
-
   const cloned = useMemo(() => clone(scene), [scene]);
 
   useEffect(() => {
     if (color) {
       cloned.traverse((child) => {
         if (child.isMesh) {
-          console.log(child.name); // Log the name of each mesh
           child.material = new MeshStandardMaterial({
-            color: color || "white",
+            color,
             roughness: 1,
             metalness: 0,
           });
@@ -29,12 +27,17 @@ export default function Prop({
     }
   }, [cloned, color]);
 
+  const degToRad = (deg) => MathUtils.degToRad(deg);
+  const rotationRad = rotation.map(degToRad);
+
+  const scaleValue = Array.isArray(scale) ? scale : [scale, scale, scale];
+
   return (
     <primitive
       object={cloned}
       position={position}
-      rotation={rotation}
-      scale={scale}
+      rotation={rotationRad}
+      scale={scaleValue}
     />
   );
 }
