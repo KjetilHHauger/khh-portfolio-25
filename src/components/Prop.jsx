@@ -18,6 +18,7 @@ export default function Prop({
     if (color) {
       cloned.traverse((child) => {
         if (child.isMesh) {
+          console.log(child.name); // Log the name of each mesh
           child.material = new MeshStandardMaterial({
             color: color || "white",
             roughness: 1,
