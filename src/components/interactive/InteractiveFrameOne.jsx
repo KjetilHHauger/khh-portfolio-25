@@ -18,6 +18,8 @@ export default function InteractiveFrameOne({
   contentPosition = [0, 0, 0.1],
   contentRotation = [0, 0, 0],
 }) {
+  const degToRad = (deg) => (deg * Math.PI) / 180;
+
   const { scene } = useGLTF(url);
   const model = useMemo(() => {
     const cloned = clone(scene);
@@ -32,7 +34,7 @@ export default function InteractiveFrameOne({
   const spring = useSpring({
     position: focused ? focusPosition : position,
     scale: focused ? focusScale : scale,
-    rotation: focused ? focusRotation : rotation,
+    rotation: (focused ? focusRotation : rotation).map(degToRad),
     config: { mass: 1, tension: 180, friction: 22 },
   });
 
@@ -47,9 +49,9 @@ export default function InteractiveFrameOne({
           transform
           distanceFactor={1.5}
           position={contentPosition}
-          rotation={contentRotation}
+          rotation={contentRotation.map(degToRad)}
         >
-          <div className="p-4 bg-white text-black rounded w-[1200px] h-[1200px]">
+          <div className="p-4 bg-white text-black rounded w-[300px] h-[300px]">
             {content}
             <button
               onClick={() => setFocused(false)}
