@@ -19,6 +19,13 @@ export default function InteractiveModal({
       rotation={rotation.map((deg) => (deg * Math.PI) / 180)}
       scale={Array.isArray(scale) ? scale : [scale, scale, scale]}
       onClick={onClick}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerOut={() => {
+        document.body.style.cursor = "default";
+      }}
     />
   );
 }

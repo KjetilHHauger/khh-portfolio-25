@@ -1,7 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stats } from "@react-three/drei";
 import { useState } from "react";
-
 import InteractiveModal from "./components/Interactive/InteractiveModal";
 import FloorGrid from "./components/FloorGrid";
 import Prop from "./components/Prop";
@@ -36,7 +35,7 @@ export default function SceneCanvas() {
         {/* Static props */}
         <Prop
           url="/models/CardboardBoxes.glb"
-          position={[-2, 0, -3.6]}
+          position={[-2, 0, -2.8]}
           rotation={[0, 0, 0]}
           scale={3}
         />
@@ -54,17 +53,73 @@ export default function SceneCanvas() {
             rotation={[0, -90, 0]}
             scale={3}
           />
-          <Prop
+          <InteractiveModal
             url="/models/ComputerMonitor.glb"
             position={[0.5, 2.83, -3.4]}
             rotation={[0, 20, 0]}
             scale={1}
+            onClick={() =>
+              setModalContent(
+                <div className="flex flex-col items-center w-full  text-black p-4 gap-4">
+                  <h1 className="text-center text-xl font-bold">Contact</h1>
+                  <form
+                    name="contact"
+                    method="POST"
+                    data-netlify="true"
+                    className="flex flex-col gap-2"
+                  >
+                    <input type="hidden" name="form-name" value="contact" />
+                    <label className="flex flex-col text-sm">
+                      Name
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        className="border p-1 rounded"
+                      />
+                    </label>
+                    <label className="flex flex-col text-sm">
+                      Email
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        className="border p-1 rounded"
+                      />
+                    </label>
+                    <label className="flex flex-col text-sm">
+                      Message
+                      <textarea
+                        name="message"
+                        rows="4"
+                        required
+                        className="border p-1 rounded"
+                      />
+                    </label>
+                    <button
+                      type="submit"
+                      className="mt-2 text-black py-1 px-3 rounded hover:text-gray-600 cursor-pointer bg-white border border-gray-300 hover:bg-gray-100 transition-colors"
+                    >
+                      Send
+                    </button>
+                  </form>
+                </div>
+              )
+            }
           />
-          <Prop
+          <InteractiveModal
             url="/models/ComputerMonitor.glb"
             position={[2.5, 2.83, -3.4]}
             rotation={[0, -20, 0]}
             scale={1}
+            onClick={() =>
+              setModalContent(
+                <div>
+                  <h2 className="text-xl font-bold mb-2">Monitor</h2>
+                  <p>Right</p>
+                </div>
+              )
+            }
           />
           <Prop
             url="/models/ComputerDesktop.glb"
@@ -121,17 +176,39 @@ export default function SceneCanvas() {
             scale={[1, 3, 2]}
             color={"#000"}
           />
-          <Prop
+          <InteractiveModal
             url="/models/LegoMoonBuggy.glb"
             position={[-0.5, 5.5, -3.6]}
             rotation={[0, 193, 0]}
             scale={1}
+            onClick={() =>
+              setModalContent(
+                <div>
+                  <h2 className="text-xl font-bold mb-2">Brickify</h2>
+                  <p>Your leading Lego blog</p>
+                  <a href="https://khh-bloggie.netlify.app" target="_blank">
+                    Brickify
+                  </a>
+                </div>
+              )
+            }
           />
-          <Prop
+          <InteractiveModal
             url="/models/Rocketship.glb"
             position={[5.2, 5.9, -3.6]}
             rotation={[0, 193, 0]}
             scale={1}
+            onClick={() =>
+              setModalContent(
+                <div>
+                  <h2 className="text-xl font-bold mb-2">Science Museum</h2>
+                  <p>Explore the universe</p>
+                  <a href="https://science-m.netlify.app" target="_blank">
+                    Science rules
+                  </a>
+                </div>
+              )
+            }
           />
           {/* Middle */}
           <Prop
@@ -156,11 +233,22 @@ export default function SceneCanvas() {
             scale={[1, 3, 2]}
             color={"#000"}
           />
-          <Prop
+          <InteractiveModal
             url="/models/SeaSideVilla.glb"
             position={[-2, 7.73, -3.55]}
             rotation={[0, 60, 0]}
             scale={0.35}
+            onClick={() =>
+              setModalContent(
+                <div>
+                  <h2 className="text-xl font-bold mb-2">Holidaze</h2>
+                  <p>Stay curious, stay cozy, stay Holidaze</p>
+                  <a href="https://khh-daze.netlify.app" target="_blank">
+                    Holidaze
+                  </a>
+                </div>
+              )
+            }
           />
           <InteractiveModal
             url="/models/Gavel.glb"
@@ -174,6 +262,9 @@ export default function SceneCanvas() {
                     Hammer time auction
                   </h2>
                   <p>Hammer Time</p>
+                  <a href="https://khh-ht.netlify.app" target="_blank">
+                    Hit that hammer
+                  </a>
                 </div>
               )
             }
