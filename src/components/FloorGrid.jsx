@@ -10,7 +10,7 @@ export default function FloorGrid({
   const { scene } = useGLTF(url);
 
   const floors = useMemo(() => {
-    const gridSize = 9;
+    const gridSize = 15;
     const tileSize = 2;
     const offset = (gridSize * tileSize) / 2;
     const instances = [];
