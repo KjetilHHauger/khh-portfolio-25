@@ -4,27 +4,28 @@ import FloorGrid from "./FloorGrid";
 import Prop from "./Prop";
 import InteractivePropScroll from "./interactive/InteractivePropScroll";
 import InteractivePropDouble from "./interactive/InteractivePropDouble";
+import InteractiveFrameOne from "./interactive/InteractiveFrameOne";
+import ImagePlaneOne from "./ImagePlane/ImagePlaneOne";
 import { Text } from "@react-three/drei";
 import Wall from "./Wall";
+import { useState } from "react";
 
 export default function SceneCanvas() {
   const degToRad = (deg) => (deg * Math.PI) / 180;
+  const [focused, setFocused] = useState(false);
   return (
     <Canvas
       camera={{ position: [20, 20, 20], fov: 50 }}
       style={{ width: "100vw", height: "100vh" }}
     >
       <color attach="background" args={["#000"]} />
-
       {/* Lighting */}
-      <ambientLight intensity={1} />
-      <directionalLight position={[60, 20, 60]} intensity={3} />
-
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={2} />
       {/* Helper */}
       <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
       <pointLight position={[2, 2, 2]} intensity={0.5} />
       <axesHelper args={[5]} />
-
       {/* Controls */}
       <OrbitControls
         target={[0, 0, 0]}
@@ -32,11 +33,30 @@ export default function SceneCanvas() {
         enableZoom={true}
         enablePan={true}
       />
-
       <Stats />
-
       {/* 3D objects */}
-
+      const [focused, setFocused] = useState(false);
+      <ImagePlaneOne
+        visible={!focused}
+        imageUrl="/images/Frame1.png"
+        position={[-4.12, 4.71, -9.9]}
+        rotation={[degToRad(0), 0, 0]}
+        scale={[2.8, 1.8, 1]}
+      />
+      <InteractiveFrameOne
+        focused={focused}
+        setFocused={setFocused}
+        url="/models/Frame.glb"
+        position={[-4.4, 4.35, -10]}
+        rotation={[degToRad(90), 4.71, 0]}
+        focusPosition={[-4.4, 4.35, -10]}
+        focusRotation={[degToRad(90), 4.71, 0]}
+        scale={20}
+        focusScale={20}
+        contentPosition={[-3.5, 4.35, -4]}
+        contentRotation={[0, 0.52, 0]}
+        content={<div>Some more details here.</div>}
+      />
       {/* Tabel props */}
       <group position={[-8, 0, -2]} rotation={[0, Math.PI / 6, 0]} scale={1.2}>
         <Prop
@@ -170,7 +190,6 @@ export default function SceneCanvas() {
           scale={2}
         />
       </group>
-
       {/* Static props */}
       <Prop
         url="/models/Chair.glb"
@@ -179,19 +198,11 @@ export default function SceneCanvas() {
         scale={2}
       />
       <Prop
-        url="/models/Not_used/Column.glb"
-        position={[-9.9, 0, 7.2]}
-        rotation={[degToRad(0), degToRad(-90), 0]}
-        scale={2}
-      />
-
-      <Prop
         url="/models/Bookshelf.glb"
         position={[-9.4, 2.35, 2]}
         rotation={[degToRad(0), degToRad(-80), 0]}
         scale={1}
       />
-
       <group
         position={[2.5, 6.5, -9.5]}
         rotation={[degToRad(0), degToRad(0), 0]}
@@ -211,27 +222,24 @@ export default function SceneCanvas() {
           color={"white"}
         />
       </group>
-
       {/* Floor */}
       <FloorGrid url="/models/FloorTile.glb" position={[0, 0, 0]} scale={1} />
-
       {/* Walls */}
       <Wall
-        url="/models/WallModular.glb"
-        start={[-9, 1, -10]}
+        url="/models/Wall.glb"
+        start={[-10, 0, -10]}
         direction="x"
-        length={9}
-        height={4}
-        color="#616161"
+        length={18}
+        height={8}
+        color="#4E616C"
       />
-
       <Wall
-        url="/models/WallModular.glb"
-        start={[-10, 1, -9]}
+        url="/models/Wall.glb"
+        start={[-10, 0, -9]}
         direction="z"
-        length={9}
-        height={4}
-        color="#616161"
+        length={18}
+        height={8}
+        color="#739592"
       />
     </Canvas>
   );
