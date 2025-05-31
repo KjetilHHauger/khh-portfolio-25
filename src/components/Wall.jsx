@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils";
-import { MeshStandardMaterial, Box3, Vector3 } from "three";
+import { MeshStandardMaterial } from "three";
 
 export default function Wall({
   url = "/models/WallModular.glb",
@@ -8,39 +8,37 @@ export default function Wall({
   direction = "x", // "x" or "z"
   length = 1,
   height = 1,
-  tileSize = 2,
+  color = "white",
 }) {
   const { scene } = useGLTF(url);
-  const instances = [];
-
-  const box = new Box3().setFromObject(scene);
-  const size = new Vector3();
-  box.getSize(size);
-  const wallHeight = size.y;
+  const tileSize = 2;
+  const walls = [];
 
   for (let i = 0; i < length; i++) {
     for (let j = 0; j < height; j++) {
-      const model = clone(scene);
+      const wall = clone(scene);
 
-      model.traverse((child) => {
+      wall.traverse((child) => {
         if (child.isMesh) {
-          child.material = new MeshStandardMaterial({ color: "slategray" });
+          child.material = new MeshStandardMaterial({
+            color,
+            roughness: 1,
+            metalness: 0,
+          });
         }
       });
 
       const x = direction === "x" ? start[0] + i * tileSize : start[0];
+      const y = start[1] + j * tileSize;
       const z = direction === "z" ? start[2] + i * tileSize : start[2];
-      const y = j * wallHeight;
+      const rotY = direction === "z" ? Math.PI / 2 : 0;
 
-      model.position.set(x, y, z);
+      wall.position.set(x, y, z);
+      wall.rotation.y = rotY;
 
-      if (direction === "z") {
-        model.rotation.y = Math.PI / 2;
-      }
-
-      instances.push(<primitive key={`wall-${x}-${y}-${z}`} object={model} />);
+      walls.push(<primitive key={`${i}-${j}`} object={wall} />);
     }
   }
 
-  return <>{instances}</>;
+  return <>{walls}</>;
 }
