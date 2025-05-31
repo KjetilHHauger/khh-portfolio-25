@@ -2,7 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils";
 import { MeshStandardMaterial, Box3, Vector3 } from "three";
 
-export default function WallGrid({ url = "/models/Wall.glb" }) {
+export default function WallGrid({ color, url = "/models/Wall.glb" }) {
   const { scene } = useGLTF(url);
 
   const createWall = (x, z, rotation = 0) => {
@@ -10,7 +10,11 @@ export default function WallGrid({ url = "/models/Wall.glb" }) {
 
     model.traverse((child) => {
       if (child.isMesh) {
-        child.material = new MeshStandardMaterial({ color: "darkslategray" });
+        child.material = new MeshStandardMaterial({
+          color: color || "white",
+          roughness: 1,
+          metalness: 0,
+        });
       }
     });
 
