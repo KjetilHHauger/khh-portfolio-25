@@ -86,10 +86,12 @@ export default function SceneCanvas() {
           <Text
             position={[0, 0, 0]}
             rotation={[degToRad(0), 0, 0]}
-            fontSize={0.15}
+            fontSize={0.2}
             color="black"
             anchorX="center"
             anchorY="middle"
+            material-opacity={0.6}
+            material-transparent={true}
           >
             CV
           </Text>
