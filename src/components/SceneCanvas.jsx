@@ -4,7 +4,7 @@ import FloorGrid from "./FloorGrid";
 import Prop from "./Prop";
 import InteractivePropScroll from "./interactive/InteractivePropScroll";
 import { Text } from "@react-three/drei";
-// import Wall from "./Wall";
+import Wall from "./Wall";
 
 export default function SceneCanvas() {
   const degToRad = (deg) => (deg * Math.PI) / 180;
@@ -35,21 +35,17 @@ export default function SceneCanvas() {
       <Stats />
 
       {/* 3D objects */}
-      <FloorGrid
-        url="/models/ModularDungeons/FloorTile.glb"
-        position={[0, 0, 0]}
-        scale={1}
-      />
-      <group position={[4, 0, 2]} rotation={[0, Math.PI / 2, 0]} scale={1.2}>
+      <FloorGrid url="/models/FloorTile.glb" position={[0, 0, 0]} scale={1} />
+      <group position={[-8, 0, -2]} rotation={[0, Math.PI / 6, 0]} scale={1.2}>
         <Prop
-          url="/models/ModularDungeons/TableBig.glb"
+          url="/models/TableBig.glb"
           position={[4, 0, 2]}
           rotation={[degToRad(0), degToRad(90), 0]}
           scale={1.2}
         />
 
         <InteractivePropScroll
-          url="/models/ModularDungeons/Scroll.glb"
+          url="/models/Scroll.glb"
           position={[3, 1.06, 2]}
           rotation={[degToRad(-90), degToRad(5), 0.2]}
           scale={1.2}
@@ -98,15 +94,22 @@ export default function SceneCanvas() {
         </InteractivePropScroll>
 
         <Prop
-          url="/models/ModularDungeons/CoinBag.glb"
+          url="/models/CoinBag.glb"
           position={[2.5, 0.98, 1.4]}
           rotation={[degToRad(0), degToRad(0), 0]}
           scale={2}
         />
       </group>
-      {/* <Wall start={[-20, 0, -20]} direction="x" length={20} height={4} />
 
-      <Wall start={[-20, 0, -20]} direction="z" length={20} height={4} /> */}
+      <Prop
+        url="/models/BannerWall.glb"
+        position={[2.5, 6, -9.5]}
+        rotation={[degToRad(0), degToRad(0), 0]}
+        scale={2}
+      />
+      <Wall start={[-9, 0, -10]} direction="x" length={9} height={4} />
+
+      <Wall start={[-10, 0, -9]} direction="z" length={9} height={4} />
     </Canvas>
   );
 }

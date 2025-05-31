@@ -2,7 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils";
 import { MeshStandardMaterial, Box3, Vector3 } from "three";
 
-export default function WallGrid({ url = "/models/ModularDungeons/Wall.glb" }) {
+export default function WallGrid({ url = "/models/Wall.glb" }) {
   const { scene } = useGLTF(url);
 
   const createWall = (x, z, rotation = 0) => {
@@ -15,7 +15,7 @@ export default function WallGrid({ url = "/models/ModularDungeons/Wall.glb" }) {
     });
 
     model.position.set(x, 0, z);
-    model.rotation.y = rotation; // rotation in radians (e.g., Math.PI / 2)
+    model.rotation.y = rotation;
 
     return <primitive key={`${x}-${z}`} object={model} />;
   };

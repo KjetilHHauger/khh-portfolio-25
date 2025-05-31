@@ -18,7 +18,11 @@ export default function Prop({
     if (color) {
       cloned.traverse((child) => {
         if (child.isMesh) {
-          child.material = new MeshStandardMaterial({ color });
+          child.material = new MeshStandardMaterial({
+            color: color || "white",
+            roughness: 1,
+            metalness: 0,
+          });
         }
       });
     }

@@ -3,7 +3,7 @@ import { clone } from "three/examples/jsm/utils/SkeletonUtils";
 import { MeshStandardMaterial, Box3, Vector3 } from "three";
 
 export default function Wall({
-  url = "/models/ModularDungeons/WallModular.glb",
+  url = "/models/WallModular.glb",
   start = [0, 0, 0],
   direction = "x", // "x" or "z"
   length = 1,

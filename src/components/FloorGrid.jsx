@@ -2,9 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils";
 import { Box3, Vector3, MeshStandardMaterial } from "three";
 
-export default function FloorGrid({
-  url = "/models/ModularDungeons/FloorTile.glb",
-}) {
+export default function FloorGrid({ url = "/models/FloorTile.glb" }) {
   const { scene } = useGLTF(url);
 
   const createTile = (x, z) => {
@@ -15,7 +13,7 @@ export default function FloorGrid({
   };
 
   const floors = [];
-  const gridSize = 20;
+  const gridSize = 9;
   const tileSize = 2;
   const offset = (gridSize * tileSize) / 2;
 
