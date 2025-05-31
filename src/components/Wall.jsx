@@ -3,7 +3,7 @@ import { clone } from "three/examples/jsm/utils/SkeletonUtils";
 import { MeshStandardMaterial } from "three";
 
 export default function Wall({
-  url = "/models/WallModular.glb",
+  url = "/models/Wall.glb",
   start = [0, 0, 0],
   direction = "x", // "x" or "z"
   length = 1,
@@ -11,7 +11,7 @@ export default function Wall({
   color = "white",
 }) {
   const { scene } = useGLTF(url);
-  const tileSize = 2;
+  const tileSize = 1;
   const walls = [];
 
   for (let i = 0; i < length; i++) {
