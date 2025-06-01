@@ -42,6 +42,7 @@ export default function SceneCanvas() {
         />
         <Stats />
         {/* 3D objects */}
+
         {/* Static props */}
         <Prop
           url="/models/CardboardBoxes.glb"
