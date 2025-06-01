@@ -9,6 +9,7 @@ import Prop from "./components/Prop";
 import Wall from "./components/Wall";
 import CameraDebugHUD from "./components/DevCamera/CameraDebugHUD";
 import CameraTracker from "./components/DevCamera/CameraTracker";
+import InteractiveAnimatedModal from "./components/Interactive/InteractiveAnimatedModal";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -92,6 +93,72 @@ export default function SceneCanvas() {
             rotation={[0, -90, 0]}
             scale={3}
           />
+          <InteractiveAnimatedModal
+            url="/models/HoodedAdventurer.glb"
+            position={[4.5, 2.825, -1]}
+            rotation={[0, -40, 0]}
+            scale={0.5}
+            hitboxPosition={[0.05, 1, 0.1]}
+            hitboxScale={[0.8, 2, 0.5]}
+            hitboxRotation={[0, 0, 0]}
+            onClick={() =>
+              setModalContent(
+                <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
+                  <h2 className="text-3xl font-bold">Anemic Heroes</h2>
+
+                  <img
+                    src="/images/AnemicHeroes.webp"
+                    alt="Screenshot of the project"
+                    loading="lazy"
+                    className="w-full rounded shadow-md"
+                  />
+
+                  <p className="text-lg text-left text-gray-700 leading-relaxed">
+                    Anemic Heroes is a browser-based dungeon crawler developed
+                    as a team project at Noroff. Built with React and
+                    JavaScript, the game lets players create their own hero and
+                    embark on branching adventures filled with traders,
+                    encounters, and turn-based battles.
+                  </p>
+
+                  <p className="text-lg text-left text-gray-700 leading-relaxed">
+                    Players can choose from distinct classes like mage, warrior,
+                    or rogue — each with unique stats and playstyles. The map
+                    system generates random encounter paths ending in boss
+                    fights, while progression is tracked through battles and
+                    equipment upgrades.
+                  </p>
+
+                  <p className="text-lg text-left text-gray-700 leading-relaxed">
+                    Featuring a shop, character sheet, item system, and a
+                    scalable combat engine, Anemic Heroes emphasizes tactical
+                    planning and replayability. Defeat the boss to continue — or
+                    start over and try again.
+                  </p>
+
+                  <div className="flex gap-3 mt-2">
+                    <a
+                      href="https://your-anemic-heroes-demo-link.netlify.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-blue-600 text-white text-lg font-semibold rounded hover:bg-blue-700 transition"
+                    >
+                      Visit Site
+                    </a>
+                    <a
+                      href="https://github.com/AnemicGames/AnemicHeroes"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gray-800 text-white text-lg font-semibold rounded hover:bg-gray-900 transition"
+                    >
+                      GitHub Repository
+                    </a>
+                  </div>
+                </div>
+              )
+            }
+          />
+
           <InteractiveModal
             url="/models/ComputerMonitor.glb"
             position={[0.5, 2.83, -3.4]}
@@ -586,22 +653,6 @@ export default function SceneCanvas() {
             height={10}
             color="#739592"
           />
-          {/* <Wall
-          url="/models/Wall.glb"
-          start={[-10, 0, -9]}
-          direction="z"
-          length={4}
-          height={8}
-          color="#739592"
-        /> */}
-          {/* <Wall
-          url="/models/Wall.glb"
-          start={[-10, 6, -5]}
-          direction="z"
-          length={4}
-          height={2}
-          color="#739592"
-        /> */}
         </group>
         <group position={[24, 0, 6]} scale={1}>
           {/* Wall Green */}
@@ -613,22 +664,6 @@ export default function SceneCanvas() {
             height={10}
             color="#739592"
           />
-          {/* <Wall
-          url="/models/Wall.glb"
-          start={[-10, 0, -9]}
-          direction="z"
-          length={4}
-          height={8}
-          color="#739592"
-        /> */}
-          {/* <Wall
-          url="/models/Wall.glb"
-          start={[-10, 6, -5]}
-          direction="z"
-          length={4}
-          height={2}
-          color="#739592"
-        /> */}
         </group>
         {/* Floor */}
         <FloorGrid
