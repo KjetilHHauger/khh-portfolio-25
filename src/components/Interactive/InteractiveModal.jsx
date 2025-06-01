@@ -27,7 +27,13 @@ export default function InteractiveModal({
         position={hitboxPosition}
         rotation={toRadians(hitboxRotation)}
         scale={hitboxScale}
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          setTimeout(() => {
+            document.exitPointerLock?.();
+          }, 10);
+          onClick?.();
+        }}
         onPointerOver={() => (document.body.style.cursor = "pointer")}
         onPointerOut={() => (document.body.style.cursor = "default")}
       >
@@ -37,7 +43,13 @@ export default function InteractiveModal({
 
       <primitive
         object={model}
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          setTimeout(() => {
+            document.exitPointerLock?.();
+          }, 10);
+          onClick?.();
+        }}
         onPointerOver={(e) => {
           e.stopPropagation();
           document.body.style.cursor = "pointer";
