@@ -32,7 +32,7 @@ export default function InteractiveModal({
         onPointerOut={() => (document.body.style.cursor = "default")}
       >
         <boxGeometry args={[1, 1, 1]} />
-        <meshBasicMaterial transparent opacity={0.5} />
+        <meshBasicMaterial transparent opacity={0} />
       </mesh>
 
       <primitive
