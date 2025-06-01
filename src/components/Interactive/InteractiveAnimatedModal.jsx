@@ -18,12 +18,14 @@ export default function InteractiveAnimatedModal({
   if (!cloned.current) cloned.current = clone(scene);
 
   const modelRef = useRef();
-  const { actions } = useAnimations(animations, modelRef);
-  const idle = actions["CharacterArmature|Idle"];
-  const wave = actions["CharacterArmature|Wave"];
   const [current, setCurrent] = useState("idle");
 
+  const { actions } = useAnimations(animations, modelRef);
+
   useEffect(() => {
+    const idle = actions["CharacterArmature|Idle"];
+    const wave = actions["CharacterArmature|Wave"];
+
     if (!idle || !wave) return;
 
     let timeout;
@@ -38,17 +40,22 @@ export default function InteractiveAnimatedModal({
       timeout = setTimeout(() => {
         if (unmounted) return;
         idle.fadeOut(0.5);
-        wave.reset().fadeIn(0.5).play();
-        wave.setLoop(THREE.LoopOnce);
-        wave.clampWhenFinished = true;
-        setCurrent("wave");
-        wave.getMixer().addEventListener("finished", onWaveDone);
+        playWave();
       }, 10000);
     };
 
-    const onWaveDone = () => {
+    const playWave = () => {
+      wave.reset().fadeIn(0.5).play();
+      wave.setLoop(THREE.LoopOnce);
+      wave.clampWhenFinished = true;
+      setCurrent("wave");
+
+      wave.getMixer().addEventListener("finished", onWaveFinished);
+    };
+
+    const onWaveFinished = () => {
+      wave.getMixer().removeEventListener("finished", onWaveFinished);
       wave.fadeOut(0.5);
-      wave.getMixer().removeEventListener("finished", onWaveDone);
       playIdle();
     };
 
@@ -59,9 +66,15 @@ export default function InteractiveAnimatedModal({
       clearTimeout(timeout);
       idle?.stop();
       wave?.stop();
-      wave?.getMixer().removeEventListener("finished", onWaveDone);
+      wave?.getMixer().removeEventListener("finished", onWaveFinished);
     };
-  }, [idle, wave]);
+  }, [actions]);
+
+  useEffect(() => {
+    if (animations.length > 0 && actions) {
+      console.log("Available animations:", Object.keys(actions));
+    }
+  }, [animations, actions]);
 
   return (
     <group

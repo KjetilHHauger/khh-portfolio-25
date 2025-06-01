@@ -33,7 +33,7 @@ export default function SceneCanvas() {
         <pointLight position={[2, 2, 2]} intensity={0.5} />
         {/* Controls */}
         <OrbitControls
-          target={[0, 0, 0]}
+          target={[4.5, 2.5, -3.6]}
           enableRotate={false}
           enableZoom={false}
           enablePan={false}
@@ -96,7 +96,7 @@ export default function SceneCanvas() {
           />
           <InteractiveAnimatedModal
             url="/models/HoodedAdventurer.glb"
-            position={[4.5, 2.825, -1]}
+            position={[3.7, 6.744, -3.4]}
             rotation={[0, -40, 0]}
             scale={0.5}
             hitboxPosition={[0.05, 1, 0.1]}
