@@ -88,7 +88,13 @@ export default function InteractiveAnimatedModal({
         position={hitboxPosition}
         scale={hitboxScale}
         rotation={hitboxRotation.map((r) => (r * Math.PI) / 180)}
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          setTimeout(() => {
+            document.exitPointerLock?.();
+          }, 10);
+          onClick?.();
+        }}
         onPointerOver={() => (document.body.style.cursor = "pointer")}
         onPointerOut={() => (document.body.style.cursor = "default")}
       >
