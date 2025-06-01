@@ -474,14 +474,10 @@ export default function SceneCanvas() {
                   />
 
                   <p className="text-lg text-left text-gray-700 leading-relaxed">
-                    Holidaze is a modern React-based booking platform built as
-                    my final project at Noroff. Inspired by platforms like
-                    Airbnb, it allows users to explore, filter, and book unique
-                    venues with ease. From lazy-loaded image galleries to a
-                    smooth booking modal and user authentication, the experience
-                    is crafted to feel both intuitive and engaging. The site
-                    features a cinematic hero video and responsive design, with
-                    accessibility and SEO baked in.
+                    Holidaze is a responsive React-based booking platform built
+                    for my Noroff final project. It features venue filtering,
+                    user authentication, and a hero video landing page — all
+                    styled with Tailwind and built for performance.
                   </p>
 
                   <span className=" text-xl text-gray-600">
