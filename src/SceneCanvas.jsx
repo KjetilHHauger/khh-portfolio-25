@@ -5,8 +5,6 @@ import InteractiveModal from "./components/Interactive/InteractiveModal";
 import FloorGrid from "./components/FloorGrid";
 import Prop from "./components/Prop";
 import Wall from "./components/Wall";
-import UserCamera from "./components/UserCamera";
-import ClickHandler from "./components/ClickHandler";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -26,19 +24,11 @@ export default function SceneCanvas() {
         <pointLight position={[2, 2, 2]} intensity={0.5} />
         <axesHelper args={[5]} />
         {/* Controls */}
-        <UserCamera disabled={!!modalContent} />
-
         <OrbitControls
-          target={[4, 4.6, 0]}
-          minPolarAngle={Math.PI / 3}
-          maxPolarAngle={Math.PI / 2}
-          enableZoom={false}
-          enablePan={false}
-        />
-        <ClickHandler
-          onClick={(object) => {
-            console.log("Clicked:", object);
-          }}
+          target={[0, 0, 0]}
+          enableRotate={true}
+          enableZoom={true}
+          enablePan={true}
         />
         <Stats />
         {/* 3D objects */}
