@@ -1,12 +1,6 @@
 import { useThree, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-/**
- * Restricts the camera to a defined bounding box.
- * @param {{
- *  bounds: { x: [number, number], y: [number, number], z: [number, number] }
- * }} props
- */
 export default function CameraLimiter({
   bounds = {
     x: [-5, 5],

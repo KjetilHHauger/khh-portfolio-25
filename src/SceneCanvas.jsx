@@ -10,6 +10,7 @@ import Wall from "./components/Wall";
 import CameraDebugHUD from "./components/DevCamera/CameraDebugHUD";
 import CameraTracker from "./components/DevCamera/CameraTracker";
 import InteractiveAnimatedModal from "./components/Interactive/InteractiveAnimatedModal";
+import CameraLimiter from "./components/CameraLimiter";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -33,10 +34,20 @@ export default function SceneCanvas() {
         <pointLight position={[2, 2, 2]} intensity={0.5} />
         {/* Controls */}
         <OrbitControls
-          target={[4.5, 2.5, -3.6]}
-          enableRotate={true}
-          enableZoom={true}
+          minDistance={4}
+          maxDistance={14}
+          minPolarAngle={Math.PI / 4}
+          maxPolarAngle={Math.PI / 2}
           enablePan={true}
+          enableZoom={true}
+        />
+
+        <CameraLimiter
+          bounds={{
+            x: [-8, 8],
+            y: [2, 8],
+            z: [-8, 8],
+          }}
         />
 
         <CameraTracker onUpdate={setCameraInfo} />
