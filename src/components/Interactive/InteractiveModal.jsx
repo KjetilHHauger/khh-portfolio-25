@@ -13,19 +13,33 @@ export default function InteractiveModal({
   const model = useMemo(() => clone(scene), [scene]);
 
   return (
-    <primitive
-      object={model}
+    <group
       position={position}
       rotation={rotation.map((deg) => (deg * Math.PI) / 180)}
       scale={Array.isArray(scale) ? scale : [scale, scale, scale]}
-      onClick={onClick}
-      onPointerOver={(e) => {
-        e.stopPropagation();
-        document.body.style.cursor = "pointer";
-      }}
-      onPointerOut={() => {
-        document.body.style.cursor = "default";
-      }}
-    />
+    >
+      {/* hitbox */}
+      <mesh
+        position={[0, 0.7, 0.2]}
+        onClick={onClick}
+        onPointerOver={() => (document.body.style.cursor = "pointer")}
+        onPointerOut={() => (document.body.style.cursor = "default")}
+      >
+        <boxGeometry args={[1.8, 2, 0.5]} />
+        <meshBasicMaterial transparent opacity={0} />
+      </mesh>
+
+      <primitive
+        object={model}
+        onClick={onClick}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = "default";
+        }}
+      />
+    </group>
   );
 }
