@@ -1,6 +1,6 @@
 import InteractiveModal from "../Interactive/InteractiveModal";
 
-export default function DeskSetup({ setModalContent }) {
+export default function CardBoardBoxes({ setModalContent }) {
   return (
     <InteractiveModal
       url="/models/CardboardBoxes.glb"
