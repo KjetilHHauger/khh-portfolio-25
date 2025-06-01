@@ -50,9 +50,29 @@ export default function SceneCanvas() {
           hitboxRotation={[0, 0, 0]}
           onClick={() =>
             setModalContent(
-              <div>
-                <h2 className="text-xl font-bold mb-2">Cardboard</h2>
-                <p>Always save your lego boxes</p>
+              <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
+                <h2 className="text-2xl font-bold text-center">
+                  Cardboard Retirement Plan™
+                </h2>
+                <img
+                  src="/images/LegoCollection.webp"
+                  alt="Unopened LEGO box"
+                  className="w-full rounded shadow-md"
+                />
+                <p className="text-sm text-left text-gray-700 leading-relaxed">
+                  Welcome to a sacred vault of creativity — untouched since
+                  purchase, sealed with the hope that one day, in the golden
+                  glow of retirement, it will be built. Or admired. Or… traded
+                  for a house.
+                </p>
+                <p className="text-sm text-left text-gray-700 leading-relaxed">
+                  With every unopened LEGO set, the legend grows. Friends laugh,
+                  shelves sag, and resale value fluctuates — but the mission is
+                  clear: preserve potential, defer joy, and hoard with purpose.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed italic text-center">
+                  “Don’t touch it. It’s a retirement build.”
+                </p>
               </div>
             )
           }
@@ -81,7 +101,7 @@ export default function SceneCanvas() {
             hitboxRotation={[0, 0, 0]}
             onClick={() =>
               setModalContent(
-                <div className="flex flex-col items-center w-full  text-black p-4 gap-4">
+                <div className="flex flex-col items-stretch w-full  text-black p-4 gap-4">
                   <h1 className="text-center text-xl font-bold">Contact</h1>
                   <form
                     name="contact"
@@ -245,7 +265,7 @@ export default function SceneCanvas() {
                     </h2>
                     <div className="text-sm text-gray-700">
                       Noroff School of Technology and Digital Media <br />
-                      <span className="text-xs text-gray-500">2023 – 2025</span>
+                      <span className="text-xs text-gray-500">2023 - 2025</span>
                     </div>
                   </section>
                 </div>
@@ -316,12 +336,43 @@ export default function SceneCanvas() {
             hitboxRotation={[0, 0, 0]}
             onClick={() =>
               setModalContent(
-                <div>
-                  <h2 className="text-xl font-bold mb-2">Brickify</h2>
-                  <p>Your leading Lego blog</p>
-                  <a href="https://khh-bloggie.netlify.app" target="_blank">
-                    Brickify
-                  </a>
+                <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
+                  <h2 className="text-3xl font-bold">Brickify</h2>
+
+                  <img
+                    src="/images/Brickify.webp"
+                    alt="Screenshot of the project"
+                    className="w-full rounded shadow-md"
+                  />
+
+                  <p className="text-lg text-left text-gray-700 leading-relaxed">
+                    Brickify is a vibrant blog platform built during my time at
+                    Noroff, created for fellow LEGO enthusiasts. It features
+                    dynamic content loading, search filtering, pagination, and a
+                    responsive carousel for showcasing the latest builds. With
+                    full user authentication and blog management tools, it’s
+                    designed to be both playful and practical — a digital space
+                    to celebrate bricks and creativity.
+                  </p>
+
+                  <div className="flex gap-3 mt-2">
+                    <a
+                      href="https://khh-bloggie.netlify.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-blue-600 text-white text-lg font-semibold rounded hover:bg-blue-700 transition"
+                    >
+                      Visit Site
+                    </a>
+                    <a
+                      href="https://github.com/KjetilHHauger/FED1-EXAME-KJETIL-H-H"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gray-800 text-white text-lg font-semibold rounded hover:bg-gray-900 transition"
+                    >
+                      GitHub Repository
+                    </a>
+                  </div>
                 </div>
               )
             }
@@ -336,12 +387,42 @@ export default function SceneCanvas() {
             hitboxRotation={[0, 0, 0]}
             onClick={() =>
               setModalContent(
-                <div>
-                  <h2 className="text-xl font-bold mb-2">Science Museum</h2>
-                  <p>Explore the universe</p>
-                  <a href="https://science-m.netlify.app" target="_blank">
-                    Science rules
-                  </a>
+                <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
+                  <h2 className="text-3xl font-bold">Science Museum</h2>
+
+                  <img
+                    src="/images/ScienceMuseum.webp"
+                    alt="Screenshot of the project"
+                    className="w-full rounded shadow-md"
+                  />
+
+                  <p className="text-lg text-left text-gray-700 leading-relaxed">
+                    Created as part of my Front-end development studies at
+                    Noroff, this project is designed to engage children aged 7 -
+                    14 through a fun and interactive digital experience. The
+                    goal was to combine playful visuals with educational
+                    content, making learning both accessible and exciting for
+                    young users.
+                  </p>
+
+                  <div className="flex gap-3 mt-2">
+                    <a
+                      href="https://kjetilhhauger.github.io/science_museum//"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-blue-600 text-white text-lg font-semibold rounded hover:bg-blue-700 transition"
+                    >
+                      Visit Site
+                    </a>
+                    <a
+                      href="https://github.com/KjetilHHauger/science_museum"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gray-800 text-white text-lg font-semibold rounded hover:bg-gray-900 transition"
+                    >
+                      GitHub Repository
+                    </a>
+                  </div>
                 </div>
               )
             }
@@ -379,12 +460,48 @@ export default function SceneCanvas() {
             hitboxRotation={[0, 0, 0]}
             onClick={() =>
               setModalContent(
-                <div>
-                  <h2 className="text-xl font-bold mb-2">Holidaze</h2>
-                  <p>Stay curious, stay cozy, stay Holidaze</p>
-                  <a href="https://khh-daze.netlify.app" target="_blank">
-                    Holidaze
-                  </a>
+                <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
+                  <h2 className="text-3xl font-bold">Holidaze</h2>
+
+                  <img
+                    src="/images/Holidaze.webp"
+                    alt="Screenshot of the project"
+                    className="w-full rounded shadow-md"
+                  />
+
+                  <p className="text-lg text-left text-gray-700 leading-relaxed">
+                    Holidaze is a modern React-based booking platform built as
+                    my final project at Noroff. Inspired by platforms like
+                    Airbnb, it allows users to explore, filter, and book unique
+                    venues with ease. From lazy-loaded image galleries to a
+                    smooth booking modal and user authentication, the experience
+                    is crafted to feel both intuitive and engaging. The site
+                    features a cinematic hero video and responsive design, with
+                    accessibility and SEO baked in.
+                  </p>
+
+                  <span className=" text-xl text-gray-600">
+                    Stay curious, stay cozy, stay Holidaze.
+                  </span>
+
+                  <div className="flex gap-3 mt-2">
+                    <a
+                      href="https://khh-daze.netlify.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-blue-600 text-white text-lg font-semibold rounded hover:bg-blue-700 transition"
+                    >
+                      Visit Site
+                    </a>
+                    <a
+                      href="https://github.com/KjetilHHauger/KHH-AUCTION-24"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gray-800 text-white text-lg font-semibold rounded hover:bg-gray-900 transition"
+                    >
+                      GitHub Repository
+                    </a>
+                  </div>
                 </div>
               )
             }
@@ -399,14 +516,44 @@ export default function SceneCanvas() {
             hitboxRotation={[0, 0, 0]}
             onClick={() =>
               setModalContent(
-                <div>
-                  <h2 className="text-xl font-bold mb-2">
-                    Hammer time auction
-                  </h2>
-                  <p>Hammer Time</p>
-                  <a href="https://khh-ht.netlify.app" target="_blank">
-                    Hit that hammer
-                  </a>
+                <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
+                  <h2 className="text-3xl font-bold">Hammer Time</h2>
+
+                  <img
+                    src="/images/HammerTime.webp"
+                    alt="Screenshot of the project"
+                    className="w-full rounded shadow-md"
+                  />
+
+                  <p className="text-lg text-left text-gray-700 leading-relaxed">
+                    Welcome to Hammer Time — an interactive auction platform
+                    built as part of my studies at Noroff. This project allows
+                    users to explore live auctions, place bids, and create their
+                    own listings. Featuring user authentication, listing
+                    management, and real-time bidding functionality, it’s
+                    powered by the Noroff Auction API and designed for smooth,
+                    intuitive interaction. Think of it as eBay with more
+                    personality (and fewer fees).
+                  </p>
+
+                  <div className="flex gap-3 mt-2">
+                    <a
+                      href="https://khh-ht.netlify.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-blue-600 text-white text-lg font-semibold rounded hover:bg-blue-700 transition"
+                    >
+                      Visit Site
+                    </a>
+                    <a
+                      href="https://github.com/KjetilHHauger/KHH-AUCTION-24"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-gray-800 text-white text-lg font-semibold rounded hover:bg-gray-900 transition"
+                    >
+                      GitHub Repository
+                    </a>
+                  </div>
                 </div>
               )
             }
@@ -502,7 +649,8 @@ export default function SceneCanvas() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white text-black p-6 rounded shadow-lg w-[90%] max-w-[600px] h-[80%] overflow-auto relative"
+              className="
+              bg-white text-black p-6 rounded shadow-lg w-[90%] max-w-[600px] h-fit overflow-auto relative"
               onClick={(e) => e.stopPropagation()}
               initial={{ y: 50, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
