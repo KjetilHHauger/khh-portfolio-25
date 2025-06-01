@@ -5,9 +5,15 @@ import InteractiveModal from "./components/Interactive/InteractiveModal";
 import FloorGrid from "./components/FloorGrid";
 import Prop from "./components/Prop";
 import Wall from "./components/Wall";
+import CameraDebugHUD from "./components/DevCamera/CameraDebugHUD";
+import CameraTracker from "./components/DevCamera/CameraTracker";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
+  const [cameraInfo, setCameraInfo] = useState({
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+  });
 
   return (
     <>
@@ -22,7 +28,6 @@ export default function SceneCanvas() {
         {/* Helper */}
         <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
         <pointLight position={[2, 2, 2]} intensity={0.5} />
-        <axesHelper args={[5]} />
         {/* Controls */}
         <OrbitControls
           target={[0, 0, 0]}
@@ -30,6 +35,8 @@ export default function SceneCanvas() {
           enableZoom={true}
           enablePan={true}
         />
+        <CameraTracker onUpdate={setCameraInfo} />
+
         <Stats />
         {/* 3D objects */}
 
@@ -349,6 +356,8 @@ export default function SceneCanvas() {
           color="#625d57"
         />
       </Canvas>
+      <CameraDebugHUD cameraInfo={cameraInfo} />
+
       <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
         <div className="w-2 h-2 bg-white rounded-full" />
       </div>
