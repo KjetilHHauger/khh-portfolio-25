@@ -1,6 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stats } from "@react-three/drei";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 import InteractiveModal from "./components/Interactive/InteractiveModal";
 import FloorGrid from "./components/FloorGrid";
 import Prop from "./components/Prop";
@@ -493,25 +495,35 @@ export default function SceneCanvas() {
       <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
         <div className="w-2 h-2 bg-white rounded-full" />
       </div>
-      {modalContent && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
-          onClick={() => setModalContent(null)}
-        >
-          <div
-            className="bg-white text-black p-6 rounded shadow-lg w-[90%] max-w-[600px] h-[80%] overflow-auto relative"
-            onClick={(e) => e.stopPropagation()}
+
+      <AnimatePresence>
+        {modalContent && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            onClick={() => setModalContent(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <button
-              onClick={() => setModalContent(null)}
-              className="absolute top-4 right-4 text-xl"
+            <motion.div
+              className="bg-white text-black p-6 rounded shadow-lg w-[90%] max-w-[600px] h-[80%] overflow-auto relative"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ y: 50, opacity: 0, scale: 0.95 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 50, opacity: 0, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
-              ✕
-            </button>
-            {modalContent}
-          </div>
-        </div>
-      )}
+              <button
+                onClick={() => setModalContent(null)}
+                className="absolute top-4 right-4 text-xl"
+              >
+                ✕
+              </button>
+              {modalContent}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
