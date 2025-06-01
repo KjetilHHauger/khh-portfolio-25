@@ -651,7 +651,7 @@ export default function SceneCanvas() {
           >
             <motion.div
               className="
-              bg-white text-black p-6 rounded shadow-lg w-[90%] max-w-[600px] h-fit overflow-auto relative"
+              bg-white text-black p-6 rounded shadow-lg w-[90%] max-w-[600px] max-h-[90vh] h-fit overflow-auto relative"
               onClick={(e) => e.stopPropagation()}
               initial={{ y: 50, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
