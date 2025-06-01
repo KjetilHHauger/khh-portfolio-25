@@ -57,6 +57,7 @@ export default function SceneCanvas() {
                 <img
                   src="/images/LegoCollection.webp"
                   alt="Unopened LEGO box"
+                  loading="lazy"
                   className="w-full rounded shadow-md"
                 />
                 <p className="text-sm text-left text-gray-700 leading-relaxed">
@@ -342,6 +343,7 @@ export default function SceneCanvas() {
                   <img
                     src="/images/Brickify.webp"
                     alt="Screenshot of the project"
+                    loading="lazy"
                     className="w-full rounded shadow-md"
                   />
 
@@ -393,6 +395,7 @@ export default function SceneCanvas() {
                   <img
                     src="/images/ScienceMuseum.webp"
                     alt="Screenshot of the project"
+                    loading="lazy"
                     className="w-full rounded shadow-md"
                   />
 
@@ -466,6 +469,7 @@ export default function SceneCanvas() {
                   <img
                     src="/images/Holidaze.webp"
                     alt="Screenshot of the project"
+                    loading="lazy"
                     className="w-full rounded shadow-md"
                   />
 
@@ -522,6 +526,7 @@ export default function SceneCanvas() {
                   <img
                     src="/images/HammerTime.webp"
                     alt="Screenshot of the project"
+                    loading="lazy"
                     className="w-full rounded shadow-md"
                   />
 
