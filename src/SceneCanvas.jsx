@@ -5,6 +5,8 @@ import InteractiveModal from "./components/Interactive/InteractiveModal";
 import FloorGrid from "./components/FloorGrid";
 import Prop from "./components/Prop";
 import Wall from "./components/Wall";
+import UserCamera from "./components/UserCamera";
+import ClickHandler from "./components/ClickHandler";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -12,7 +14,7 @@ export default function SceneCanvas() {
   return (
     <>
       <Canvas
-        camera={{ position: [20, 20, 20], fov: 50 }}
+        camera={{ position: [0, 20, 10], fov: 50 }}
         style={{ width: "100vw", height: "100vh" }}
       >
         <color attach="background" args={["#000"]} />
@@ -24,11 +26,19 @@ export default function SceneCanvas() {
         <pointLight position={[2, 2, 2]} intensity={0.5} />
         <axesHelper args={[5]} />
         {/* Controls */}
+        <UserCamera disabled={!!modalContent} />
+
         <OrbitControls
-          target={[0, 0, 0]}
-          enableRotate={true}
-          enableZoom={true}
-          enablePan={true}
+          target={[4, 4.6, 0]}
+          minPolarAngle={Math.PI / 3}
+          maxPolarAngle={Math.PI / 2}
+          enableZoom={false}
+          enablePan={false}
+        />
+        <ClickHandler
+          onClick={(object) => {
+            console.log("Clicked:", object);
+          }}
         />
         <Stats />
         {/* 3D objects */}
@@ -348,6 +358,9 @@ export default function SceneCanvas() {
           color="#625d57"
         />
       </Canvas>
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
+        <div className="w-2 h-2 bg-white rounded-full" />
+      </div>
       {modalContent && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
