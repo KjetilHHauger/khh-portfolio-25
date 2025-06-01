@@ -13,6 +13,7 @@ import AnimationModalWrapper from "./components/Ui/AnimationModalWrapper";
 import Crosshair from "./components/Ui/Crosshair";
 import PointerLockPrompt from "./components/Ui/PointerLockPrompt";
 import CardBoardBoxes from "./components/SceneComp/CardBoardBoxes";
+import MoviePoster from "./components/SceneComp/MoviePoster";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -77,6 +78,7 @@ export default function SceneCanvas() {
           <Stats />
           {/* Room objects */}
           <CardBoardBoxes setModalContent={setModalContent} />
+          <MoviePoster setModalContent={setModalContent} />
           {/* Desk */}
           <DeskSetup setModalContent={setModalContent} />
           {/* Shelf */}
