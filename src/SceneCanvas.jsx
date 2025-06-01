@@ -492,10 +492,6 @@ export default function SceneCanvas() {
       </Canvas>
       <CameraDebugHUD cameraInfo={cameraInfo} />
 
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
-        <div className="w-2 h-2 bg-white rounded-full" />
-      </div>
-
       <AnimatePresence>
         {modalContent && (
           <motion.div
@@ -511,7 +507,7 @@ export default function SceneCanvas() {
               initial={{ y: 50, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: 50, opacity: 0, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
             >
               <button
                 onClick={() => setModalContent(null)}

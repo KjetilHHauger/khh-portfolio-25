@@ -1,7 +1,7 @@
 import { useThree, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
-export default function CameraTracker({ onUpdate, interval = 1000 }) {
+export default function CameraTracker({ onUpdate, interval = 50000 }) {
   const { camera } = useThree();
   const lastUpdate = useRef(0);
 
