@@ -7,7 +7,7 @@ export default function FloorGrid({ url = "/models/FloorTile.glb", color }) {
   const { scene } = useGLTF(url);
 
   const floors = useMemo(() => {
-    const gridSize = 15;
+    const gridSize = 9;
     const tileSize = 2;
     const offset = (gridSize * tileSize) / 2;
     const instances = [];
