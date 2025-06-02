@@ -73,20 +73,21 @@ export default function PlayerControls({
     };
   }, [gl, camera]);
 
-  // Frame loop
   useFrame(() => {
     const direction = new THREE.Vector3();
-    if (inputState?.forward) direction.z -= 1;
-    if (inputState?.backward) direction.z += 1;
+
+    // if (keys.current["KeyW"] || inputState?.forward) direction.z -= 1;
+    // if (keys.current["KeyS"] || inputState?.backward) direction.z += 1;
+    // if (keys.current["KeyA"] || inputState?.left) direction.x -= 1;
+    // if (keys.current["KeyD"] || inputState?.right) direction.x += 1;
 
     direction.normalize().multiplyScalar(speed);
     const move = direction.applyEuler(camera.rotation);
     camera.position.add(move);
 
     if (lookDelta) {
-      const scale = 0.01;
-      camera.rotation.y -= lookDelta.dx * scale;
-      camera.rotation.x -= lookDelta.dy * scale;
+      camera.rotation.y -= lookDelta.dx * 0.002;
+      camera.rotation.x -= lookDelta.dy * 0.002;
       camera.rotation.x = THREE.MathUtils.clamp(
         camera.rotation.x,
         -Math.PI / 2,
@@ -100,4 +101,5 @@ export default function PlayerControls({
       camera.position.z = THREE.MathUtils.clamp(camera.position.z, ...bounds.z);
     }
   });
+  return <PointerLockControls args={[camera, gl.domElement]} />;
 }

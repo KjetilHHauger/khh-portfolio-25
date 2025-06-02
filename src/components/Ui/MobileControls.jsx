@@ -36,25 +36,25 @@ export default function MobileControls({ onMove, onLook }) {
     };
   }, [onLook]);
 
-  return (
-    <>
-      {/* Buttons */}
-      <div className="absolute bottom-4 right-4 z-50 flex flex-col gap-4">
-        <button
-          className="bg-white/80 p-4 rounded-full text-xl"
-          onTouchStart={() => onMove("forward", true)}
-          onTouchEnd={() => onMove("forward", false)}
-        >
-          ↑
-        </button>
-        <button
-          className="bg-white/80 p-4 rounded-full text-xl"
-          onTouchStart={() => onMove("backward", true)}
-          onTouchEnd={() => onMove("backward", false)}
-        >
-          ↓
-        </button>
-      </div>
-    </>
-  );
+  //   return (
+  //     <>
+  //       {/* Buttons */}
+  //       <div className="absolute bottom-4 right-4 z-50 flex flex-col gap-4">
+  //         <button
+  //           className="bg-white/80 p-4 rounded-full text-xl"
+  //           onTouchStart={() => onMove("forward", true)}
+  //           onTouchEnd={() => onMove("forward", false)}
+  //         >
+  //           ↑
+  //         </button>
+  //         <button
+  //           className="bg-white/80 p-4 rounded-full text-xl"
+  //           onTouchStart={() => onMove("backward", true)}
+  //           onTouchEnd={() => onMove("backward", false)}
+  //         >
+  //           ↓
+  //         </button>
+  //       </div>
+  //     </>
+  //   );
 }

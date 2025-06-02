@@ -16,9 +16,9 @@ export default function Thumbstick({ onMove }) {
     manager.on("move", (_, data) => {
       const rad = data.angle.radian;
       const force = data.force;
-      const scaled = Math.min(force * 0.2, 0.5); // Sensitivity
+      const scaled = Math.min(force * 0.2, 2.8); // Sensitivity
       const dx = Math.cos(rad) * scaled;
-      const dy = Math.sin(rad) * scaled;
+      const dy = -Math.sin(rad) * scaled;
       onMove({ dx, dy });
     });
 

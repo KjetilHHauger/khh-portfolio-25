@@ -83,7 +83,7 @@ export default function SceneCanvas() {
         )}
 
         <Canvas
-          camera={{ position: [4.99, 8.26, 13.01], fov: 50 }}
+          camera={{ position: [0, 6.26, 13.01], fov: 50 }}
           style={{ width: "100vw", height: "100vh" }}
         >
           <color attach="background" args={["#000"]} />
