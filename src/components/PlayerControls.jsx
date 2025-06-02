@@ -1,19 +1,20 @@
 import { PointerLockControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function PlayerControls({
   speed = 0.1,
   bounds,
-  inputState = {},
-  lookDelta = { dx: 0, dy: 0 },
+  inputState,
+  lookDelta,
 }) {
   const { camera, gl } = useThree();
   const keys = useRef({});
   const isTouching = useRef(false);
   const lastTouch = useRef({ x: 0, y: 0 });
 
+  // Keyboard controls
   useEffect(() => {
     const down = (e) => (keys.current[e.code] = true);
     const up = (e) => (keys.current[e.code] = false);
@@ -25,6 +26,7 @@ export default function PlayerControls({
     };
   }, []);
 
+  // Mobile camera look (drag)
   useEffect(() => {
     const dom = gl.domElement;
 
@@ -38,6 +40,7 @@ export default function PlayerControls({
 
     const onTouchMove = (e) => {
       if (!isTouching.current) return;
+
       const dx = e.touches[0].clientX - lastTouch.current.x;
       const dy = e.touches[0].clientY - lastTouch.current.y;
 
@@ -70,27 +73,31 @@ export default function PlayerControls({
     };
   }, [gl, camera]);
 
+  // Frame loop
   useFrame(() => {
     const direction = new THREE.Vector3();
-    if (keys.current["KeyW"] || inputState.forward) direction.z -= 1;
-    if (keys.current["KeyS"] || inputState.backward) direction.z += 1;
-    if (keys.current["KeyA"]) direction.x -= 1;
-    if (keys.current["KeyD"]) direction.x += 1;
+    if (inputState?.forward) direction.z -= 1;
+    if (inputState?.backward) direction.z += 1;
 
     direction.normalize().multiplyScalar(speed);
     const move = direction.applyEuler(camera.rotation);
     camera.position.add(move);
 
-    if (bounds) {
-      camera.rotation.y -= lookDelta.dx * 0.002;
-      camera.rotation.x -= lookDelta.dy * 0.002;
+    if (lookDelta) {
+      const scale = 0.01;
+      camera.rotation.y -= lookDelta.dx * scale;
+      camera.rotation.x -= lookDelta.dy * scale;
       camera.rotation.x = THREE.MathUtils.clamp(
         camera.rotation.x,
         -Math.PI / 2,
         Math.PI / 2
       );
     }
-  });
 
-  return <PointerLockControls />;
+    if (bounds) {
+      camera.position.x = THREE.MathUtils.clamp(camera.position.x, ...bounds.x);
+      camera.position.y = THREE.MathUtils.clamp(camera.position.y, ...bounds.y);
+      camera.position.z = THREE.MathUtils.clamp(camera.position.z, ...bounds.z);
+    }
+  });
 }

@@ -15,18 +15,18 @@ import PointerLockPrompt from "./components/Ui/PointerLockPrompt";
 import CardBoardBoxes from "./components/SceneComp/CardBoardBoxes";
 import MoviePoster from "./components/SceneComp/MoviePoster";
 import MobileControls from "./components/Ui/MobileControls";
+import Thumbstick from "./components/Ui/ThumbStick";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
   const [suppressClick, setSuppressClick] = useState(false);
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+  const [joystickInput, setJoystickInput] = useState({ dx: 0, dy: 0 });
   const [lookDelta, setLookDelta] = useState({ dx: 0, dy: 0 });
+
   const [inputState, setInputState] = useState({
     forward: false,
     backward: false,
-    left: false,
-    right: false,
   });
 
   useEffect(() => {
@@ -76,10 +76,10 @@ export default function SceneCanvas() {
         ]}
       >
         {isMobile && (
-          <MobileControls
-            onMove={handleTouchInput}
-            onLook={(dx, dy) => setLookDelta({ dx, dy })}
-          />
+          <>
+            <Thumbstick onMove={setLookDelta} />
+            <MobileControls onMove={handleTouchInput} onLook={setLookDelta} />
+          </>
         )}
 
         <Canvas
@@ -87,27 +87,21 @@ export default function SceneCanvas() {
           style={{ width: "100vw", height: "100vh" }}
         >
           <color attach="background" args={["#000"]} />
-          {/* Lighting */}
           <LightingSetup />
-          {/* Controls */}
           <PlayerControls
             speed={0.15}
-            bounds={{ x: [-8, 8], y: [2, 8], z: [-8, 8] }}
             inputState={inputState}
             lookDelta={lookDelta}
+            bounds={{ x: [-8, 8], y: [2, 8], z: [-8, 8] }}
           />
 
           <Stats />
-          {/* Room objects */}
+
           <CardBoardBoxes setModalContent={setModalContent} />
           <MoviePoster setModalContent={setModalContent} />
-          {/* Desk */}
           <DeskSetup setModalContent={setModalContent} />
-          {/* Shelf */}
           <ShelfSetup setModalContent={setModalContent} />
-          {/* Wall */}
           <WallSetup />
-          {/* Floor */}
           <FloorGrid
             url="/models/FloorTile.glb"
             position={[0, 0, 0]}

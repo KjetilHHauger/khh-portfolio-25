@@ -6,6 +6,7 @@ export default function MobileControls({ onMove, onLook }) {
 
   useEffect(() => {
     const joystick = joystickRef.current;
+    if (!joystick) return;
 
     const handleTouchStart = (e) => {
       const touch = e.touches[0];
@@ -28,6 +29,7 @@ export default function MobileControls({ onMove, onLook }) {
     joystick.addEventListener("touchend", handleTouchEnd);
 
     return () => {
+      if (!joystick) return; // ✅ null check before removing
       joystick.removeEventListener("touchstart", handleTouchStart);
       joystick.removeEventListener("touchmove", handleTouchMove);
       joystick.removeEventListener("touchend", handleTouchEnd);
@@ -36,13 +38,6 @@ export default function MobileControls({ onMove, onLook }) {
 
   return (
     <>
-      {/* Joy */}
-      <div
-        ref={joystickRef}
-        className="absolute bottom-4 left-4 w-24 h-24 bg-white/20 rounded-full z-50"
-        style={{ touchAction: "none" }}
-      />
-
       {/* Buttons */}
       <div className="absolute bottom-4 right-4 z-50 flex flex-col gap-4">
         <button
