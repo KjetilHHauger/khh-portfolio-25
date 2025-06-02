@@ -15,7 +15,7 @@ import PointerLockPrompt from "./components/Ui/PointerLockPrompt";
 import CardBoardBoxes from "./components/SceneComp/CardBoardBoxes";
 import MoviePoster from "./components/SceneComp/MoviePoster";
 import MobileControls from "./components/Ui/MobileControls";
-import Thumbstick from "./components/Ui/ThumbStick";
+import Thumbstick from "./components/Ui/Thumbstick";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
