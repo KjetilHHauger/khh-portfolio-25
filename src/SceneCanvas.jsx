@@ -20,9 +20,13 @@ export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
   const [suppressClick, setSuppressClick] = useState(false);
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const [lookDelta, setLookDelta] = useState({ dx: 0, dy: 0 });
   const [inputState, setInputState] = useState({
     forward: false,
     backward: false,
+    left: false,
+    right: false,
   });
 
   useEffect(() => {
@@ -71,7 +75,12 @@ export default function SceneCanvas() {
           { name: "right", keys: ["KeyD"] },
         ]}
       >
-        {isMobile && <MobileControls onMove={handleTouchInput} />}
+        {isMobile && (
+          <MobileControls
+            onMove={handleTouchInput}
+            onLook={(dx, dy) => setLookDelta({ dx, dy })}
+          />
+        )}
 
         <Canvas
           camera={{ position: [4.99, 8.26, 13.01], fov: 50 }}
@@ -83,12 +92,9 @@ export default function SceneCanvas() {
           {/* Controls */}
           <PlayerControls
             speed={0.15}
-            bounds={{
-              x: [-8, 8],
-              y: [2, 8],
-              z: [-8, 8],
-            }}
+            bounds={{ x: [-8, 8], y: [2, 8], z: [-8, 8] }}
             inputState={inputState}
+            lookDelta={lookDelta}
           />
 
           <Stats />
