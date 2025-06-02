@@ -14,10 +14,16 @@ import Crosshair from "./components/Ui/Crosshair";
 import PointerLockPrompt from "./components/Ui/PointerLockPrompt";
 import CardBoardBoxes from "./components/SceneComp/CardBoardBoxes";
 import MoviePoster from "./components/SceneComp/MoviePoster";
+import MobileControls from "./components/Ui/MobileControls";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
   const [suppressClick, setSuppressClick] = useState(false);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const [inputState, setInputState] = useState({
+    forward: false,
+    backward: false,
+  });
 
   useEffect(() => {
     if (modalContent) {
@@ -31,6 +37,13 @@ export default function SceneCanvas() {
       return () => clearTimeout(timeout);
     }
   }, [modalContent]);
+
+  function handleTouchInput(direction, isActive) {
+    setInputState((prev) => ({
+      ...prev,
+      [direction]: isActive,
+    }));
+  }
 
   return (
     <>
@@ -58,6 +71,8 @@ export default function SceneCanvas() {
           { name: "right", keys: ["KeyD"] },
         ]}
       >
+        {isMobile && <MobileControls onMove={handleTouchInput} />}
+
         <Canvas
           camera={{ position: [4.99, 8.26, 13.01], fov: 50 }}
           style={{ width: "100vw", height: "100vh" }}
@@ -73,6 +88,7 @@ export default function SceneCanvas() {
               y: [2, 8],
               z: [-8, 8],
             }}
+            inputState={inputState}
           />
 
           <Stats />

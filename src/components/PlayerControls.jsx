@@ -3,7 +3,11 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export default function PlayerControls({ speed = 0.1, bounds }) {
+export default function PlayerControls({
+  speed = 0.1,
+  bounds,
+  inputState = {},
+}) {
   const { camera } = useThree();
   const keys = useRef({});
 
@@ -20,10 +24,16 @@ export default function PlayerControls({ speed = 0.1, bounds }) {
 
   useFrame(() => {
     const direction = new THREE.Vector3();
-    if (keys.current["KeyW"]) direction.z -= 1;
-    if (keys.current["KeyS"]) direction.z += 1;
-    if (keys.current["KeyA"]) direction.x -= 1;
-    if (keys.current["KeyD"]) direction.x += 1;
+
+    const moveForward = keys.current["KeyW"] || inputState.forward;
+    const moveBackward = keys.current["KeyS"] || inputState.backward;
+    const moveLeft = keys.current["KeyA"] || inputState.left;
+    const moveRight = keys.current["KeyD"] || inputState.right;
+
+    if (moveForward) direction.z -= 1;
+    if (moveBackward) direction.z += 1;
+    if (moveLeft) direction.x -= 1;
+    if (moveRight) direction.x += 1;
 
     direction.normalize().multiplyScalar(speed);
     camera.translateX(direction.x);
