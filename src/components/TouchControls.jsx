@@ -2,7 +2,7 @@ import { useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export default function TouchControls() {
+export default function TouchControls({ speed = 0.1 }) {
   const { camera } = useThree();
   const touchData = useRef({
     lastTouches: [],
@@ -30,9 +30,13 @@ export default function TouchControls() {
 
         const delta = distNow - distPrev;
 
+        // Pinch walking
         const dir = new THREE.Vector3();
         camera.getWorldDirection(dir);
-        dir.multiplyScalar(delta * 0.01); // scale speed
+        dir.y = 0;
+        dir.normalize();
+        dir.multiplyScalar((delta / 100) * speed);
+
         camera.position.add(dir);
       }
 
@@ -46,6 +50,7 @@ export default function TouchControls() {
     const handleAnimationFrame = () => {
       const data = touchData.current;
 
+      // Look pointer
       if (Math.abs(data.velocityX) > 0.1 || Math.abs(data.velocityY) > 0.1) {
         camera.rotation.y -= data.velocityX * 0.002;
         camera.rotation.x -= data.velocityY * 0.002;
@@ -66,7 +71,7 @@ export default function TouchControls() {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [camera]);
+  }, [camera, speed]);
 
   return null;
 }
