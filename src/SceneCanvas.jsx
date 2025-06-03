@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stats } from "@react-three/drei";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { KeyboardControls } from "@react-three/drei";
 
 import FloorGrid from "./components/FloorGrid";
@@ -15,13 +15,15 @@ import PointerLockPrompt from "./components/Ui/PointerLockPrompt";
 import CardBoardBoxes from "./components/SceneComp/CardBoardBoxes";
 import MoviePoster from "./components/SceneComp/MoviePoster";
 import MovementButtons from "./components/Controllers/MovementButtons";
-import MovementLogic from "./components/Controllers/MovementLogic";
+import JoystickUI from "./components/Ui/JoystickUI";
+import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
   const [suppressClick, setSuppressClick] = useState(false);
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const [movement, setMovement] = useState({ forward: false, backward: false });
+  const joystickInput = useRef({ angle: 0, force: 0 });
 
   useEffect(() => {
     if (modalContent) {
@@ -78,7 +80,9 @@ export default function SceneCanvas() {
               z: [-8, 8],
             }}
           />
-          {isMobile && <MovementLogic {...movement} />}
+          {isMobile && (
+            <MobileControlLogic movement={movement} look={joystickInput} />
+          )}
 
           <Stats />
           {/* Room objects */}
@@ -99,7 +103,12 @@ export default function SceneCanvas() {
           />
         </Canvas>
       </KeyboardControls>
-      {isMobile && <MovementButtons onChange={setMovement} />}
+      {isMobile && (
+        <>
+          <JoystickUI onMove={(v) => (joystickInput.current = v)} />
+          <MovementButtons onChange={setMovement} />
+        </>
+      )}
 
       {!modalContent && <Crosshair />}
       <PointerLockPrompt />

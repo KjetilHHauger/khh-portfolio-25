@@ -10,7 +10,7 @@ export default function MovementButtons({ onChange }) {
   };
 
   return (
-    <div className="fixed bottom-4 left-1/2 flex gap-4 z-50 -translate-x-1/2">
+    <div className="fixed bottom-4 right-8 flex flex-col gap-4 z-50 ">
       <button
         className="bg-white/70 text-black px-4 py-2 rounded shadow-lg text-lg active:scale-95"
         onTouchStart={() => handlePress("forward", true)}
