@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stats } from "@react-three/drei";
+import { OrbitControls, Stats, PerspectiveCamera } from "@react-three/drei";
 import { useState, useEffect, useRef } from "react";
 import { KeyboardControls } from "@react-three/drei";
 
@@ -24,6 +24,8 @@ export default function SceneCanvas() {
   const joystickInput = useRef({ angle: 0, force: 0 });
   const [sensitivity, setSensitivity] = useState(1);
   const [pointerLocked, setPointerLocked] = useState(false);
+  const cameraRef = useRef();
+  const cameraRig = useRef();
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -68,6 +70,15 @@ export default function SceneCanvas() {
           <color attach="background" args={["#000"]} />
           {/* Lighting */}
           <LightingSetup />
+          {/* Camera */}
+          <group ref={cameraRig}>
+            <PerspectiveCamera
+              makeDefault
+              ref={cameraRef}
+              position={[0, 5, 0]}
+            />
+          </group>
+
           {/* Controls */}
           <PlayerControls
             speed={0.15}
@@ -77,11 +88,15 @@ export default function SceneCanvas() {
               z: [-8, 8],
             }}
           />
+
           {isMobile && (
             <MobileControlLogic
               movement={movement}
               look={joystickInput}
               sensitivity={sensitivity}
+              lockVertical={true}
+              cameraRef={cameraRef}
+              rigRef={cameraRig}
             />
           )}
 
