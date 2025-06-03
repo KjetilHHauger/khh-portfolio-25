@@ -38,7 +38,7 @@ export default function SceneCanvas() {
     <>
       <div
         onClick={() => document.body.requestPointerLock()}
-        className="fixed bottom-4 left-4 z-50 text-white bg-black/50 px-3 py-1 rounded cursor-pointer"
+        className="fixed invisible md:visible bottom-4 left-4 z-50 text-white bg-black/50 px-3 py-1 rounded cursor-pointer"
       >
         <p>Click to Reconnect Camera</p>
         <p>Click to Move (WASD)</p>
