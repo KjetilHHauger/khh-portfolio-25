@@ -175,7 +175,7 @@ export default function ShelfSetup({ setModalContent }) {
 
               <div className="flex gap-3 mt-2">
                 <a
-                  href="https://your-anemic-heroes-demo-link.netlify.app"
+                  href="https://anemic-heroes.netlify.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-blue-600 text-white text-lg font-semibold rounded hover:bg-blue-700 transition"
