@@ -2,9 +2,15 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-export default function MobileControlLogic({ movement, look }) {
+export default function MobileControlLogic({
+  movement,
+  look,
+  sensitivity = 1,
+}) {
   const { camera } = useThree();
   const pitch = useRef(0);
+  const ROTATION_SPEED = 0.008 * sensitivity;
+  const PITCH_SPEED = 0.005 * sensitivity;
 
   useFrame(() => {
     const dir = new THREE.Vector3();
@@ -21,10 +27,10 @@ export default function MobileControlLogic({ movement, look }) {
       const x = Math.cos(angle) * force;
       const y = -Math.sin(angle) * force;
 
-      camera.rotation.y -= x * 0.02;
+      camera.rotation.y -= x * ROTATION_SPEED;
 
       pitch.current = THREE.MathUtils.clamp(
-        pitch.current - y * 0.02,
+        pitch.current - y * PITCH_SPEED,
         -Math.PI / 2 + 0.1,
         Math.PI / 2 - 0.1
       );
