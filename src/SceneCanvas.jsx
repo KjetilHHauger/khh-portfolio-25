@@ -16,6 +16,7 @@ import MoviePoster from "./components/SceneComp/MoviePoster";
 import MovementButtons from "./components/Controllers/MovementButtons";
 import JoystickUI from "./components/Ui/JoystickUI";
 import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
+import MovementBoundsHelper from "./components/Dev/MovementBoundsHelper";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -83,9 +84,9 @@ export default function SceneCanvas() {
           <PlayerControls
             speed={0.15}
             bounds={{
-              x: [-8, 8],
-              y: [2, 8],
-              z: [-8, 8],
+              x: [-9.5, 7.5],
+              y: [2, 7],
+              z: [-9, 8],
             }}
           />
 
