@@ -1,37 +1,63 @@
 import { useThree } from "@react-three/fiber";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
 
 export default function TouchControls() {
   const { camera } = useThree();
+  const touchData = useRef({
+    lastTouches: [],
+    velocityX: 0,
+    velocityY: 0,
+  });
 
   useEffect(() => {
-    let lastTouches = [];
-
     const handleTouchMove = (e) => {
       const touches = e.touches;
+      const data = touchData.current;
 
-      if (touches.length === 1 && lastTouches.length === 1) {
-        const dx = touches[0].clientX - lastTouches[0].clientX;
-        const dy = touches[0].clientY - lastTouches[0].clientY;
-        camera.rotation.y -= dx * 0.005;
-        camera.rotation.x -= dy * 0.005;
-      } else if (touches.length === 2 && lastTouches.length === 2) {
-        const getDistance = (t1, t2) =>
-          Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+      if (touches.length === 1 && data.lastTouches.length === 1) {
+        const dx = touches[0].clientX - data.lastTouches[0].clientX;
+        const dy = touches[0].clientY - data.lastTouches[0].clientY;
 
-        const currentDistance = getDistance(touches[0], touches[1]);
-        const lastDistance = getDistance(lastTouches[0], lastTouches[1]);
+        data.velocityX = dx;
+        data.velocityY = dy;
+      } else if (touches.length === 2 && data.lastTouches.length === 2) {
+        const getDist = (a, b) =>
+          Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
 
-        const delta = currentDistance - lastDistance;
-        camera.position.z -= delta * 0.01;
+        const distNow = getDist(touches[0], touches[1]);
+        const distPrev = getDist(data.lastTouches[0], data.lastTouches[1]);
+
+        const delta = distNow - distPrev;
+
+        const dir = new THREE.Vector3();
+        camera.getWorldDirection(dir);
+        dir.multiplyScalar(delta * 0.01); // scale speed
+        camera.position.add(dir);
       }
 
-      lastTouches = [...touches];
+      data.lastTouches = [...touches];
     };
 
     const handleTouchEnd = () => {
-      lastTouches = [];
+      touchData.current.lastTouches = [];
     };
+
+    const handleAnimationFrame = () => {
+      const data = touchData.current;
+
+      if (Math.abs(data.velocityX) > 0.1 || Math.abs(data.velocityY) > 0.1) {
+        camera.rotation.y -= data.velocityX * 0.002;
+        camera.rotation.x -= data.velocityY * 0.002;
+
+        data.velocityX *= 0.9;
+        data.velocityY *= 0.9;
+      }
+
+      requestAnimationFrame(handleAnimationFrame);
+    };
+
+    handleAnimationFrame();
 
     window.addEventListener("touchmove", handleTouchMove, { passive: false });
     window.addEventListener("touchend", handleTouchEnd);
