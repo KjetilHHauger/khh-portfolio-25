@@ -20,24 +20,20 @@ import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
-  const [suppressClick, setSuppressClick] = useState(false);
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const [movement, setMovement] = useState({ forward: false, backward: false });
   const joystickInput = useRef({ angle: 0, force: 0 });
   const [sensitivity, setSensitivity] = useState(1);
+  const [pointerLocked, setPointerLocked] = useState(false);
 
   useEffect(() => {
-    if (modalContent) {
-      document.exitPointerLock?.();
-    } else {
-      setSuppressClick(true);
-      const timeout = setTimeout(() => {
-        document.body.requestPointerLock?.();
-        setSuppressClick(false);
-      }, 300);
-      return () => clearTimeout(timeout);
-    }
-  }, [modalContent]);
+    const canvas = document.querySelector("canvas");
+    const updateLock = () => {
+      setPointerLocked(document.pointerLockElement === canvas);
+    };
+    document.addEventListener("pointerlockchange", updateLock);
+    return () => document.removeEventListener("pointerlockchange", updateLock);
+  }, []);
 
   return (
     <>
@@ -132,7 +128,8 @@ export default function SceneCanvas() {
       )}
 
       {!modalContent && <Crosshair />}
-      <PointerLockPrompt />
+      {!modalContent && !isMobile && !pointerLocked && <PointerLockPrompt />}
+
       <AnimationModalWrapper
         modalContent={modalContent}
         setModalContent={setModalContent}
