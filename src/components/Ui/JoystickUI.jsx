@@ -29,7 +29,7 @@ export default function JoystickUI({ onMove }) {
   return (
     <div
       ref={joystickRef}
-      className="fixed bottom-8 left-8 w-[150px] h-[150px] z-50"
+      className="fixed bottom-14 left-14 w-[150px] h-[150px] z-50"
     />
   );
 }

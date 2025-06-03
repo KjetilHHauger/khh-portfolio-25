@@ -11,7 +11,7 @@ export default function MovementButtons({ onChange }) {
 
   return (
     <div
-      className="fixed bottom-4 right-8 flex flex-col gap-4 z-50 select-none"
+      className="fixed bottom-8 right-4 flex flex-col gap-4 z-50 select-none"
       style={{ touchAction: "none" }}
       onTouchMove={(e) => e.preventDefault()}
     >
