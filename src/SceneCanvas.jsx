@@ -120,7 +120,7 @@ export default function SceneCanvas() {
         </Canvas>
       </KeyboardControls>
       {isMobile && (
-        <div className="fixed bottom-36 left-1/2 transform -translate-x-1/2 z-50 bg-black/50 p-2 rounded shadow-md text-white text-sm w-[180px]">
+        <div className="fixed bottom-48 left-1/2 transform -translate-x-1/2 z-50 bg-black/50 p-2 rounded shadow-md text-white text-sm w-[180px]">
           <label className="block mb-1">Look Sensitivity</label>
           <input
             type="range"
