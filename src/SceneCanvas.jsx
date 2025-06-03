@@ -18,6 +18,7 @@ import MoviePoster from "./components/SceneComp/MoviePoster";
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
   const [suppressClick, setSuppressClick] = useState(false);
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
   useEffect(() => {
     if (modalContent) {
@@ -94,6 +95,7 @@ export default function SceneCanvas() {
           />
         </Canvas>
       </KeyboardControls>
+      {isMobile && <MovementButtons />}
 
       {!modalContent && <Crosshair />}
       <PointerLockPrompt />
