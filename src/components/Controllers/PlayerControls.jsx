@@ -2,7 +2,7 @@ import { PointerLockControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import MovementButtons from "./Ui/MovementButtons";
+import MovementButtons from "./MovementButtons";
 
 export default function PlayerControls({ speed = 0.1, bounds }) {
   const { camera } = useThree();

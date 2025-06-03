@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { KeyboardControls } from "@react-three/drei";
 
 import FloorGrid from "./components/FloorGrid";
-import PlayerControls from "./components/PlayerControls";
+import PlayerControls from "./components/Controllers/PlayerControls";
 import DeskSetup from "./components/SceneComp/DeskSetup";
 import ShelfSetup from "./components/SceneComp/ShelfSetup";
 import WallSetup from "./components/SceneComp/WallSetup";
@@ -14,11 +14,14 @@ import Crosshair from "./components/Ui/Crosshair";
 import PointerLockPrompt from "./components/Ui/PointerLockPrompt";
 import CardBoardBoxes from "./components/SceneComp/CardBoardBoxes";
 import MoviePoster from "./components/SceneComp/MoviePoster";
+import MovementButtons from "./components/Controllers/MovementButtons";
+import MovementLogic from "./components/Controllers/MovementLogic";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
   const [suppressClick, setSuppressClick] = useState(false);
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const [movement, setMovement] = useState({ forward: false, backward: false });
 
   useEffect(() => {
     if (modalContent) {
@@ -75,6 +78,7 @@ export default function SceneCanvas() {
               z: [-8, 8],
             }}
           />
+          {isMobile && <MovementLogic {...movement} />}
 
           <Stats />
           {/* Room objects */}
@@ -95,7 +99,7 @@ export default function SceneCanvas() {
           />
         </Canvas>
       </KeyboardControls>
-      {isMobile && <MovementButtons />}
+      {isMobile && <MovementButtons onChange={setMovement} />}
 
       {!modalContent && <Crosshair />}
       <PointerLockPrompt />
