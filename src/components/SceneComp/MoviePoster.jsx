@@ -16,23 +16,28 @@ export default function MoviePoster({ setModalContent }) {
         hitboxPosition={[-0.04, 0, -0.08]}
         hitboxScale={[0.3, 0.1, 0.44]}
         hitboxRotation={[0, 0, 0]}
-        onClick={() =>
-          setModalContent(
-            <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
-              <h2 className="text-2xl font-bold text-center">Runners Part 2</h2>
-              <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/qardOF52JDo?si=360OSeoztBNkNzLi"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
-          )
-        }
+        onClick={() => {
+          document.exitPointerLock?.();
+          setTimeout(() => {
+            setModalContent(
+              <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
+                <h2 className="text-2xl font-bold text-center">
+                  Runners Part 2
+                </h2>
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/qardOF52JDo?si=360OSeoztBNkNzLi"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            );
+          }, 0);
+        }}
       />
       <mesh
         position={[-1.85, 6.8, 3.35]}
