@@ -1,6 +1,9 @@
 export default function PointerLockPrompt() {
   const handleClick = () => {
-    document.body.requestPointerLock?.();
+    const canvas = document.querySelector("canvas");
+    if (canvas) {
+      canvas.requestPointerLock?.();
+    }
   };
 
   return (
