@@ -8,7 +8,7 @@ export default function JoystickUI({ onMove }) {
     const joystick = nipplejs.create({
       zone: joystickRef.current,
       mode: "static",
-      position: { left: "20%", bottom: "20%" },
+      position: { left: "50%", bottom: "50%" },
       color: "white",
       size: 100,
     });
@@ -29,7 +29,7 @@ export default function JoystickUI({ onMove }) {
   return (
     <div
       ref={joystickRef}
-      className="fixed bottom-14 left-14 w-[150px] h-[150px] z-50"
+      className="fixed bottom-0 left-2 w-[150px] h-[150px] z-50"
     />
   );
 }
