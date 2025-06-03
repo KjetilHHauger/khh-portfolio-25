@@ -6,6 +6,7 @@ import * as THREE from "three";
 export default function PlayerControls({ speed = 0.1, bounds }) {
   const { camera } = useThree();
   const keys = useRef({});
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
   useEffect(() => {
     const handleKeyDown = (e) => (keys.current[e.code] = true);
@@ -36,5 +37,5 @@ export default function PlayerControls({ speed = 0.1, bounds }) {
     }
   });
 
-  return <PointerLockControls />;
+  return isMobile ? <TouchControls /> : <PointerLockControls />;
 }
