@@ -43,8 +43,12 @@ export default function MobileControlLogic({
 
     const { angle, force } = look.current || {};
     if (force > 0) {
-      const x = Math.cos(angle) * force;
-      const y = -Math.sin(angle) * force;
+      const vec = new THREE.Vector2(
+        Math.cos(angle),
+        -Math.sin(angle)
+      ).normalize();
+      const x = vec.x * force;
+      const y = vec.y * force;
 
       rig.rotation.y -= x * ROTATION_SPEED;
 
