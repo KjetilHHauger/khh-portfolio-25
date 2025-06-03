@@ -10,11 +10,16 @@ export default function MovementButtons({ onChange }) {
   };
 
   return (
-    <div className="fixed bottom-4 right-8 flex flex-col gap-4 z-50 ">
+    <div
+      className="fixed bottom-4 right-8 flex flex-col gap-4 z-50 select-none"
+      style={{ touchAction: "none" }}
+      onTouchMove={(e) => e.preventDefault()}
+    >
       <button
         className="bg-white/70 text-black px-4 py-2 rounded shadow-lg text-lg active:scale-95"
         onTouchStart={() => handlePress("forward", true)}
         onTouchEnd={() => handlePress("forward", false)}
+        onTouchCancel={() => handlePress("forward", false)}
       >
         ↑
       </button>
@@ -22,6 +27,7 @@ export default function MovementButtons({ onChange }) {
         className="bg-white/70 text-black px-4 py-2 rounded shadow-lg text-lg active:scale-95"
         onTouchStart={() => handlePress("backward", true)}
         onTouchEnd={() => handlePress("backward", false)}
+        onTouchCancel={() => handlePress("forward", false)}
       >
         ↓
       </button>
