@@ -11,7 +11,6 @@ import WallSetup from "./components/SceneComp/WallSetup";
 import LightingSetup from "./components/SceneComp/LightingSetup";
 import AnimationModalWrapper from "./components/Ui/AnimationModalWrapper";
 import Crosshair from "./components/Ui/Crosshair";
-import PointerLockPrompt from "./components/Ui/PointerLockPrompt";
 import CardBoardBoxes from "./components/SceneComp/CardBoardBoxes";
 import MoviePoster from "./components/SceneComp/MoviePoster";
 import MovementButtons from "./components/Controllers/MovementButtons";
@@ -39,9 +38,10 @@ export default function SceneCanvas() {
     <>
       <div
         onClick={() => document.body.requestPointerLock()}
-        className="fixed top-4 left-4 z-50 text-white bg-black/50 px-3 py-1 rounded cursor-pointer"
+        className="fixed bottom-4 left-4 z-50 text-white bg-black/50 px-3 py-1 rounded cursor-pointer"
       >
-        Click to Move (WASD)
+        <p>Click to Reconnect Camera</p>
+        <p>Click to Move (WASD)</p>
       </div>
 
       {!modalContent && (
@@ -128,7 +128,6 @@ export default function SceneCanvas() {
       )}
 
       {!modalContent && <Crosshair />}
-      {!modalContent && !isMobile && !pointerLocked && <PointerLockPrompt />}
 
       <AnimationModalWrapper
         modalContent={modalContent}
