@@ -85,7 +85,7 @@ export default function SceneCanvas() {
           <Sky
             distance={450000}
             sunPosition={[100, 20, 100]}
-            inclination={0}
+            inclination={0.5}
             azimuth={0.25}
           />
           {/* Lighting */}
@@ -97,7 +97,7 @@ export default function SceneCanvas() {
             <PerspectiveCamera
               makeDefault
               ref={cameraRef}
-              position={[0, 5, 0]}
+              position={[-5, 5, 7]}
             />
           </group>
 
