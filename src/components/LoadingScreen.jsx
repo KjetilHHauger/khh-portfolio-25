@@ -11,9 +11,7 @@ export default function LoadingScreen({ progress }) {
         transition={{ duration: 0.5 }}
       >
         <img src="/KHH.png" alt="KHH Logo" className="w-[400px] " />
-        <p className="mt-4 text-sm animate-pulse opacity-75">
-          Loading... {Math.floor(progress)}%
-        </p>
+        <p className="mt-4 text-sm animate-pulse opacity-75">Loading...</p>
       </motion.div>
     </AnimatePresence>
   );
