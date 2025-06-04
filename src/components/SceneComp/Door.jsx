@@ -3,14 +3,14 @@ import InteractiveModal from "../Interactive/InteractiveModal";
 
 export default function Door({ setModalContent }) {
   return (
-    <group position={[-2, 3.5, -3]}>
+    <group position={[-2, 8.5, -3]}>
       <InteractiveModal
         url="/models/Door.glb"
-        position={[-2.1, 6, 3]}
+        position={[-2, -4, 11]}
         rotation={[90, 90, -90]}
         scale={4}
-        hitboxPosition={[-0.04, 0, -0.08]}
-        hitboxScale={[0.3, 0.1, 0.44]}
+        hitboxPosition={[-0.04, -0.13, -0.2]}
+        hitboxScale={[0.3, 1.9, 0.9]}
         hitboxRotation={[0, 0, 0]}
         onClick={() => {
           document.exitPointerLock?.();

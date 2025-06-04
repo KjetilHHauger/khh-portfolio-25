@@ -106,10 +106,6 @@ export default function WallSetup() {
         height={10}
         color="#739592"
       />
-      <group position={[0, -5, 8]}>
-        <Door setModalContent={setModalContent} />
-      </group>
-
       {/* Window Green Door */}
       <Window position={[8, 6.65, 4]} scale={[2, 1.18, 2]} />
       <Window position={[8, 6.65, -3]} scale={[3, 1.18, 2]} />

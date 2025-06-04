@@ -21,6 +21,7 @@ import MoviePoster from "./components/SceneComp/MoviePoster";
 import MovementButtons from "./components/Controllers/MovementButtons";
 import JoystickUI from "./components/Ui/JoystickUI";
 import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
+import Door from "./components/SceneComp/Door";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -31,8 +32,6 @@ export default function SceneCanvas() {
   const [pointerLocked, setPointerLocked] = useState(false);
   const cameraRef = useRef();
   const cameraRig = useRef();
-  const [sunPosition, setSunPosition] = useState([0, 20, 100]);
-  const sunRef = useRef([0, 20, 100]);
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -123,6 +122,9 @@ export default function SceneCanvas() {
           <ShelfSetup setModalContent={setModalContent} />
           {/* Wall */}
           <WallSetup />
+
+          <Door setModalContent={setModalContent} />
+
           {/* Floor */}
           <FloorGrid
             url="/models/FloorTile.glb"
