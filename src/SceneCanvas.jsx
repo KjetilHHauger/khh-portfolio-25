@@ -1,13 +1,15 @@
 import { Canvas } from "@react-three/fiber";
 import {
-  OrbitControls,
+  useProgress,
   Stats,
   PerspectiveCamera,
   Sky,
   KeyboardControls,
 } from "@react-three/drei";
 import { useState, useEffect, useRef, useMemo } from "react";
+import { AnimatePresence } from "framer-motion";
 
+import LoadingScreen from "./components/LoadingScreen";
 import FloorGrid from "./components/FloorGrid";
 import PlayerControls from "./components/Controllers/PlayerControls";
 import DeskSetup from "./components/SceneComp/DeskSetup";
@@ -40,10 +42,11 @@ export default function SceneCanvas() {
     z: [-8, 7],
   };
   const [lightsOn, setLightsOn] = useState(false);
+  const { active, progress } = useProgress();
 
   const sunPosition = useMemo(() => {
-    const theta = Math.PI * 0.4; // vertical angle
-    const phi = 2 * Math.PI * 0.25; // horizontal angle
+    const theta = Math.PI * 0.4;
+    const phi = 2 * Math.PI * 0.25;
 
     const x = Math.cos(phi) * Math.sin(theta);
     const y = Math.cos(theta);
@@ -63,6 +66,9 @@ export default function SceneCanvas() {
 
   return (
     <>
+      <AnimatePresence>
+        {active && <LoadingScreen progress={progress} />}
+      </AnimatePresence>
       <div
         onClick={() => document.body.requestPointerLock()}
         className="fixed invisible md:visible bottom-4 left-4 z-50 text-white bg-black/50 px-3 py-1 rounded cursor-pointer"
@@ -177,7 +183,7 @@ export default function SceneCanvas() {
         </>
       )}
 
-      {!modalContent && <Crosshair />}
+      {!active && !modalContent && <Crosshair />}
 
       <AnimationModalWrapper
         modalContent={modalContent}
