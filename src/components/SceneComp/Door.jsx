@@ -17,10 +17,8 @@ export default function Door({ setModalContent }) {
           setTimeout(() => {
             setModalContent(
               <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
-                <h2 className="text-2xl font-bold text-center">
-                  Door to Nowhere
-                </h2>
-                <p>Nah your not leaving. Muahah</p>
+                <h2 className="text-2xl font-bold text-center">Beware:</h2>
+                <p>This door is just a figment of your imagination!</p>
               </div>
             );
           }, 0);
