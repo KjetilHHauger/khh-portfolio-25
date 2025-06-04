@@ -18,7 +18,7 @@ export default function MobileControlLogic({
     const rig = rigRef.current;
     if (!cam || !rig) return;
 
-    cam.position.set(-5, 5, 7);
+    cam.position.set(0, 0, 0);
     rig.position.set(0, 5, 0);
     rig.add(cam);
 
