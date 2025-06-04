@@ -2,7 +2,6 @@ import { useState } from "react";
 import Wall from "../Wall";
 import * as THREE from "three";
 import Window from "../Window";
-import Door from "../SceneComp/Door";
 
 export default function WallSetup() {
   const [modalContent, setModalContent] = useState(null);

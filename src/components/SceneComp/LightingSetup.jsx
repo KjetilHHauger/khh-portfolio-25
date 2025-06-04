@@ -1,10 +1,9 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import * as THREE from "three";
-import { useThree } from "@react-three/fiber";
 import { useHelper } from "@react-three/drei";
 import { SpotLightHelper } from "three";
 
-export default function LightingSetup() {
+export default function LightingSetup({ lightsOn }) {
   const target = useRef(new THREE.Object3D());
   const spotRef = useRef();
 
@@ -46,15 +45,14 @@ export default function LightingSetup() {
       />
 
       <pointLight
-        position={[-1, 5, -5]} // hover slightly above/near desk
+        position={[-1, 5, -5]}
         intensity={10}
-        distance={15} // limit to just affect nearby objects
-        decay={1.5} // falloff (more natural dropoff)
-        color="#fff8dc" // warm neutral light (like a desk lamp)
+        distance={15}
+        decay={1.5}
+        color="#fff8dc"
       />
 
-      {/* Optional ambient to soften shadows */}
-      {/* <ambientLight intensity={0.3} /> */}
+      {lightsOn && <ambientLight intensity={0.5} />}
     </>
   );
 }

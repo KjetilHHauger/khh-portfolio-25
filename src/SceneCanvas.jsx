@@ -22,6 +22,7 @@ import MovementButtons from "./components/Controllers/MovementButtons";
 import JoystickUI from "./components/Ui/JoystickUI";
 import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
 import Door from "./components/SceneComp/Door";
+import LightSwitch from "./components/SceneComp/LightSwitch";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -37,6 +38,7 @@ export default function SceneCanvas() {
     y: [2, 8],
     z: [-8, 7],
   };
+  const [lightsOn, setLightsOn] = useState(false);
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -86,7 +88,10 @@ export default function SceneCanvas() {
             azimuth={0.25}
           />
           {/* Lighting */}
-          <LightingSetup />
+          <LightSwitch toggleLights={() => setLightsOn((prev) => !prev)} />
+
+          <LightingSetup lightsOn={lightsOn} />
+
           {/* Camera */}
           <group ref={cameraRig}>
             <PerspectiveCamera
