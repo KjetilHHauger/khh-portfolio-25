@@ -19,7 +19,7 @@ export default function MobileControlLogic({
     if (!cam || !rig) return;
 
     cam.position.set(0, 0, 0);
-    rig.position.set(0, 5, 0);
+    rig.position.set(-5, 5, 7);
     rig.add(cam);
 
     return () => rig.remove(cam);
