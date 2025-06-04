@@ -1,5 +1,6 @@
 import Prop from "../Prop";
 import InteractiveModal from "../Interactive/InteractiveModal";
+import MonitorScreen from "./MonitorScreen";
 
 export default function DeskSetup({ setModalContent }) {
   return (
@@ -74,6 +75,18 @@ export default function DeskSetup({ setModalContent }) {
           )
         }
       />
+      <MonitorScreen
+        position={[0.505, 3.68, -3.38]}
+        rotation={[0, 20, 0]}
+        imageUrl="/images/Contact.png"
+      />
+
+      <MonitorScreen
+        position={[2.5, 3.68, -3.38]}
+        rotation={[0, -20, 0]}
+        imageUrl="/images/Click.png"
+      />
+
       <InteractiveModal
         url="/models/ComputerMonitor.glb"
         position={[2.5, 2.83, -3.4]}
@@ -192,6 +205,7 @@ export default function DeskSetup({ setModalContent }) {
           )
         }
       />
+
       <Prop
         url="/models/ComputerDesktop.glb"
         position={[4.4, 2.83, -3.6]}
