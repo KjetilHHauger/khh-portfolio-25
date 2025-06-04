@@ -51,7 +51,7 @@ export default function LightingSetup({ lightsOn }) {
         decay={1.5}
         color="#fff8dc"
       />
-      <ambientLight intensity={0.3} />
+
       {lightsOn && <ambientLight intensity={0.5} />}
     </>
   );

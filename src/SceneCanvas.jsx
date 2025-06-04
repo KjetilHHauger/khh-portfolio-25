@@ -6,7 +6,7 @@ import {
   Sky,
   KeyboardControls,
 } from "@react-three/drei";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 import FloorGrid from "./components/FloorGrid";
 import PlayerControls from "./components/Controllers/PlayerControls";
@@ -40,6 +40,17 @@ export default function SceneCanvas() {
     z: [-8, 7],
   };
   const [lightsOn, setLightsOn] = useState(false);
+
+  const sunPosition = useMemo(() => {
+    const theta = Math.PI * 0.4; // vertical angle
+    const phi = 2 * Math.PI * 0.25; // horizontal angle
+
+    const x = Math.cos(phi) * Math.sin(theta);
+    const y = Math.cos(theta);
+    const z = Math.sin(phi) * Math.sin(theta);
+
+    return [x * 450000, y * 450000, z * 450000];
+  }, []);
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -82,12 +93,15 @@ export default function SceneCanvas() {
           gl={{ toneMappingExposure: 0.9 }}
           style={{ width: "100vw", height: "100vh" }}
         >
-          <Sky
-            distance={450000}
-            sunPosition={[100, 20, 100]}
-            inclination={0.5}
-            azimuth={0.25}
+          <Sky distance={450000} sunPosition={sunPosition} />
+          <directionalLight
+            position={sunPosition}
+            intensity={2}
+            castShadow
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
           />
+
           {/* Lighting */}
           <LightSwitch toggleLights={() => setLightsOn((prev) => !prev)} />
           <LightingSetup lightsOn={lightsOn} />
