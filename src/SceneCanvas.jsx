@@ -32,7 +32,7 @@ export default function SceneCanvas() {
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const [movement, setMovement] = useState({ forward: false, backward: false });
   const joystickInput = useRef({ angle: 0, force: 0 });
-  const [sensitivity, setSensitivity] = useState(1);
+  const [sensitivity, setSensitivity] = useState(1.3);
   const [pointerLocked, setPointerLocked] = useState(false);
   const cameraRef = useRef();
   const cameraRig = useRef();
@@ -160,21 +160,6 @@ export default function SceneCanvas() {
           />
         </Canvas>
       </KeyboardControls>
-      {isMobile && (
-        <div className="fixed bottom-48 left-1/2 transform -translate-x-1/2 z-50 bg-black/50 p-2 rounded shadow-md text-white text-sm w-[180px]">
-          <label className="block mb-1">Look Sensitivity(for dev)</label>
-          <input
-            type="range"
-            min="0.3"
-            max="2"
-            step="0.1"
-            value={sensitivity}
-            onChange={(e) => setSensitivity(parseFloat(e.target.value))}
-            className="w-full"
-          />
-          <div className="text-center mt-1">{sensitivity.toFixed(1)}x</div>
-        </div>
-      )}
 
       {isMobile && (
         <>
