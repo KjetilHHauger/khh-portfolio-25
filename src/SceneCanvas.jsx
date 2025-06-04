@@ -1,13 +1,15 @@
 import { Canvas } from "@react-three/fiber";
 import {
-  OrbitControls,
+  useProgress,
   Stats,
   PerspectiveCamera,
   Sky,
   KeyboardControls,
 } from "@react-three/drei";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { AnimatePresence } from "framer-motion";
 
+import LoadingScreen from "./components/LoadingScreen";
 import FloorGrid from "./components/FloorGrid";
 import PlayerControls from "./components/Controllers/PlayerControls";
 import DeskSetup from "./components/SceneComp/DeskSetup";
@@ -23,13 +25,14 @@ import JoystickUI from "./components/Ui/JoystickUI";
 import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
 import Door from "./components/SceneComp/Door";
 import LightSwitch from "./components/SceneComp/LightSwitch";
+import OutsideSetup from "./components/SceneComp/OutsideSetup";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const [movement, setMovement] = useState({ forward: false, backward: false });
   const joystickInput = useRef({ angle: 0, force: 0 });
-  const [sensitivity, setSensitivity] = useState(1);
+  const [sensitivity, setSensitivity] = useState(1.3);
   const [pointerLocked, setPointerLocked] = useState(false);
   const cameraRef = useRef();
   const cameraRig = useRef();
@@ -39,6 +42,18 @@ export default function SceneCanvas() {
     z: [-8, 7],
   };
   const [lightsOn, setLightsOn] = useState(false);
+  const { active, progress } = useProgress();
+
+  const sunPosition = useMemo(() => {
+    const theta = Math.PI * 0.4;
+    const phi = 2 * Math.PI * 0.25;
+
+    const x = Math.cos(phi) * Math.sin(theta);
+    const y = Math.cos(theta);
+    const z = Math.sin(phi) * Math.sin(theta);
+
+    return [x * 450000, y * 450000, z * 450000];
+  }, []);
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -51,6 +66,9 @@ export default function SceneCanvas() {
 
   return (
     <>
+      <AnimatePresence>
+        {active && <LoadingScreen progress={progress} />}
+      </AnimatePresence>
       <div
         onClick={() => document.body.requestPointerLock()}
         className="fixed invisible md:visible bottom-4 left-4 z-50 text-white bg-black/50 px-3 py-1 rounded cursor-pointer"
@@ -81,15 +99,17 @@ export default function SceneCanvas() {
           gl={{ toneMappingExposure: 0.9 }}
           style={{ width: "100vw", height: "100vh" }}
         >
-          <Sky
-            distance={450000}
-            sunPosition={[100, 20, 100]}
-            inclination={0}
-            azimuth={0.25}
+          <Sky distance={450000} sunPosition={sunPosition} />
+          <directionalLight
+            position={sunPosition}
+            intensity={2}
+            castShadow
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
           />
+
           {/* Lighting */}
           <LightSwitch toggleLights={() => setLightsOn((prev) => !prev)} />
-
           <LightingSetup lightsOn={lightsOn} />
 
           {/* Camera */}
@@ -97,7 +117,7 @@ export default function SceneCanvas() {
             <PerspectiveCamera
               makeDefault
               ref={cameraRef}
-              position={[0, 5, 0]}
+              position={[-5, 5, 7]}
             />
           </group>
 
@@ -126,6 +146,8 @@ export default function SceneCanvas() {
           <ShelfSetup setModalContent={setModalContent} />
           {/* Wall */}
           <WallSetup />
+          {/* Outside */}
+          <OutsideSetup />
 
           <Door setModalContent={setModalContent} />
 
@@ -138,21 +160,6 @@ export default function SceneCanvas() {
           />
         </Canvas>
       </KeyboardControls>
-      {isMobile && (
-        <div className="fixed bottom-48 left-1/2 transform -translate-x-1/2 z-50 bg-black/50 p-2 rounded shadow-md text-white text-sm w-[180px]">
-          <label className="block mb-1">Look Sensitivity(for dev)</label>
-          <input
-            type="range"
-            min="0.3"
-            max="2"
-            step="0.1"
-            value={sensitivity}
-            onChange={(e) => setSensitivity(parseFloat(e.target.value))}
-            className="w-full"
-          />
-          <div className="text-center mt-1">{sensitivity.toFixed(1)}x</div>
-        </div>
-      )}
 
       {isMobile && (
         <>
@@ -161,7 +168,7 @@ export default function SceneCanvas() {
         </>
       )}
 
-      {!modalContent && <Crosshair />}
+      {!active && !modalContent && <Crosshair />}
 
       <AnimationModalWrapper
         modalContent={modalContent}

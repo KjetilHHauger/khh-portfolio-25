@@ -135,7 +135,7 @@ export default function ShelfSetup({ setModalContent }) {
         url="/models/HoodedAdventurer.glb"
         position={[3.7, 6.744, -3.4]}
         rotation={[0, -40, 0]}
-        scale={0.5}
+        scale={0.65}
         hitboxPosition={[0.05, 1, 0.1]}
         hitboxScale={[0.8, 2, 0.5]}
         hitboxRotation={[0, 0, 0]}
