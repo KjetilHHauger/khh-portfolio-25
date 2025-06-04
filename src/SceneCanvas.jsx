@@ -23,6 +23,7 @@ import JoystickUI from "./components/Ui/JoystickUI";
 import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
 import Door from "./components/SceneComp/Door";
 import LightSwitch from "./components/SceneComp/LightSwitch";
+import OutsideSetup from "./components/SceneComp/OutsideSetup";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -89,7 +90,6 @@ export default function SceneCanvas() {
           />
           {/* Lighting */}
           <LightSwitch toggleLights={() => setLightsOn((prev) => !prev)} />
-
           <LightingSetup lightsOn={lightsOn} />
 
           {/* Camera */}
@@ -126,6 +126,8 @@ export default function SceneCanvas() {
           <ShelfSetup setModalContent={setModalContent} />
           {/* Wall */}
           <WallSetup />
+          {/* Outside */}
+          <OutsideSetup />
 
           <Door setModalContent={setModalContent} />
 
