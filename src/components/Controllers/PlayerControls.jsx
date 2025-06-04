@@ -20,26 +20,35 @@ export default function PlayerControls({ speed = 0.1, bounds }) {
   }, []);
 
   useFrame(() => {
-    const yaw = camera.rotation.y;
-    const flatForward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
-    const flatRight = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
+    const dir = new THREE.Vector3();
+    camera.getWorldDirection(dir);
+    dir.y = 0;
+    dir.normalize();
+
+    const right = new THREE.Vector3();
+    right.crossVectors(dir, camera.up).normalize();
 
     const moveVec = new THREE.Vector3();
 
-    if (keys.current["KeyW"]) moveVec.add(flatForward);
-    if (keys.current["KeyS"]) moveVec.add(flatForward.clone().negate());
-    if (keys.current["KeyA"]) moveVec.add(flatRight.clone().negate());
-    if (keys.current["KeyD"]) moveVec.add(flatRight);
+    if (keys.current["KeyW"]) moveVec.add(dir);
+    if (keys.current["KeyS"]) moveVec.add(dir.clone().negate());
+    if (keys.current["KeyA"]) moveVec.add(right.clone().negate());
+    if (keys.current["KeyD"]) moveVec.add(right);
 
     moveVec.normalize().multiplyScalar(speed);
-    camera.position.add(moveVec);
+    const nextPos = camera.position.clone().add(moveVec);
+
+    if (
+      bounds &&
+      nextPos.x >= bounds.x[0] &&
+      nextPos.x <= bounds.x[1] &&
+      nextPos.z >= bounds.z[0] &&
+      nextPos.z <= bounds.z[1]
+    ) {
+      camera.position.copy(nextPos);
+    }
 
     camera.position.y = 6;
-
-    if (bounds) {
-      camera.position.x = THREE.MathUtils.clamp(camera.position.x, ...bounds.x);
-      camera.position.z = THREE.MathUtils.clamp(camera.position.z, ...bounds.z);
-    }
   });
 
   return <>{!isMobile && <PointerLockControls />}</>;

@@ -1,7 +1,12 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stats, PerspectiveCamera } from "@react-three/drei";
+import {
+  OrbitControls,
+  Stats,
+  PerspectiveCamera,
+  Sky,
+  KeyboardControls,
+} from "@react-three/drei";
 import { useState, useEffect, useRef } from "react";
-import { KeyboardControls } from "@react-three/drei";
 
 import FloorGrid from "./components/FloorGrid";
 import PlayerControls from "./components/Controllers/PlayerControls";
@@ -26,6 +31,8 @@ export default function SceneCanvas() {
   const [pointerLocked, setPointerLocked] = useState(false);
   const cameraRef = useRef();
   const cameraRig = useRef();
+  const [sunPosition, setSunPosition] = useState([0, 20, 100]);
+  const sunRef = useRef([0, 20, 100]);
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -64,10 +71,16 @@ export default function SceneCanvas() {
         ]}
       >
         <Canvas
-          camera={{ position: [4.99, 8.26, 13.01], fov: 50 }}
+          camera={{ position: [0, 5, 0], fov: 50 }}
+          gl={{ toneMappingExposure: 0.9 }}
           style={{ width: "100vw", height: "100vh" }}
         >
-          <color attach="background" args={["#000"]} />
+          <Sky
+            distance={450000}
+            sunPosition={[100, 20, 100]}
+            inclination={0}
+            azimuth={0.25}
+          />
           {/* Lighting */}
           <LightingSetup />
           {/* Camera */}
@@ -83,9 +96,9 @@ export default function SceneCanvas() {
           <PlayerControls
             speed={0.15}
             bounds={{
-              x: [-8, 8],
+              x: [-8, 7],
               y: [2, 8],
-              z: [-8, 8],
+              z: [-8, 7],
             }}
           />
 
