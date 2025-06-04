@@ -9,6 +9,7 @@ export default function MobileControlLogic({
   lockVertical = true,
   cameraRef,
   rigRef,
+  bounds,
 }) {
   const { scene } = useThree();
 
@@ -35,9 +36,21 @@ export default function MobileControlLogic({
     const yaw = rig.rotation.y;
     const forward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
 
-    if (movement.forward) rig.position.add(forward.clone().multiplyScalar(0.1));
-    if (movement.backward)
-      rig.position.add(forward.clone().multiplyScalar(-0.1));
+    if (movement.forward || movement.backward) {
+      const moveVec = forward
+        .clone()
+        .multiplyScalar((movement.forward ? 1 : -1) * 0.1);
+      const nextPos = rig.position.clone().add(moveVec);
+
+      if (
+        nextPos.x >= bounds.x[0] &&
+        nextPos.x <= bounds.x[1] &&
+        nextPos.z >= bounds.z[0] &&
+        nextPos.z <= bounds.z[1]
+      ) {
+        rig.position.copy(nextPos);
+      }
+    }
 
     if (lockVertical) rig.position.y = 0;
 
@@ -51,6 +64,8 @@ export default function MobileControlLogic({
       const y = vec.y * force;
 
       rig.rotation.y -= x * ROTATION_SPEED;
+      rig.position.x = THREE.MathUtils.clamp(rig.position.x, ...bounds.x);
+      rig.position.z = THREE.MathUtils.clamp(rig.position.z, ...bounds.z);
 
       cam.rotation.x = THREE.MathUtils.clamp(
         cam.rotation.x - y * PITCH_SPEED,

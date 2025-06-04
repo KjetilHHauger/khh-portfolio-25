@@ -32,6 +32,11 @@ export default function SceneCanvas() {
   const [pointerLocked, setPointerLocked] = useState(false);
   const cameraRef = useRef();
   const cameraRig = useRef();
+  const movementBounds = {
+    x: [-8, 7],
+    y: [2, 8],
+    z: [-8, 7],
+  };
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -92,14 +97,7 @@ export default function SceneCanvas() {
           </group>
 
           {/* Controls */}
-          <PlayerControls
-            speed={0.15}
-            bounds={{
-              x: [-8, 7],
-              y: [2, 8],
-              z: [-8, 7],
-            }}
-          />
+          <PlayerControls speed={0.15} bounds={movementBounds} />
 
           {isMobile && (
             <MobileControlLogic
@@ -109,6 +107,7 @@ export default function SceneCanvas() {
               lockVertical={true}
               cameraRef={cameraRef}
               rigRef={cameraRig}
+              bounds={movementBounds}
             />
           )}
 
