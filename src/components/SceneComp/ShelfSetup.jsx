@@ -251,7 +251,7 @@ export default function ShelfSetup({ setModalContent }) {
                   Visit Site
                 </a>
                 <a
-                  href="https://github.com/KjetilHHauger/KHH-AUCTION-24"
+                  href="https://github.com/KjetilHHauger/kjetil_h_hauger_booking"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-gray-800 text-white text-lg font-semibold rounded hover:bg-gray-900 transition"
