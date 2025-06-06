@@ -70,12 +70,6 @@ export default function InteractiveAnimatedModal({
     };
   }, [actions]);
 
-  useEffect(() => {
-    if (animations.length > 0 && actions) {
-      console.log("Available animations:", Object.keys(actions));
-    }
-  }, [animations, actions]);
-
   return (
     <group
       position={position}
