@@ -140,7 +140,7 @@ export default function SceneCanvas() {
             />
           )}
 
-          <Stats />
+          {/* <Stats /> */}
           {/* Room objects */}
           <CardBoardBoxes setModalContent={setModalContent} />
           <MoviePoster setModalContent={setModalContent} />
@@ -201,6 +201,7 @@ export default function SceneCanvas() {
                 <p>Use your mouse to look around.</p>
                 <p>Most things are interactive and clickable.</p>
                 <p>Click to lock the pointer and reenable camera movement.</p>
+                <p>Hit ESC to get pointer if you want to leave page</p>
               </>
             )}
 
