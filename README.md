@@ -17,8 +17,10 @@ Preloaded GLTF models for optimized performance
 
 ## Installation
 
+```
 npm install
 npm run dev
+```
 
 ## Controls
 
