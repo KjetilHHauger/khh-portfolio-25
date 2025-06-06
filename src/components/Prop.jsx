@@ -14,17 +14,18 @@ export default function Prop({
   const cloned = useMemo(() => clone(scene), [scene]);
 
   useEffect(() => {
-    if (color) {
-      cloned.traverse((child) => {
-        if (child.isMesh) {
-          child.material = new MeshStandardMaterial({
-            color,
-            roughness: 1,
-            metalness: 0,
-          });
+    cloned.traverse((child) => {
+      if (child.isMesh && child.material) {
+        child.material.roughness = 1;
+        child.material.metalness = 0;
+
+        if (color) {
+          child.material.color.set(color);
         }
-      });
-    }
+
+        child.material.needsUpdate = true;
+      }
+    });
   }, [cloned, color]);
 
   const degToRad = (deg) => MathUtils.degToRad(deg);

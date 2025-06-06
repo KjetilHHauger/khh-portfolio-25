@@ -26,6 +26,7 @@ import MobileControlLogic from "./components/Controllers/MobileControllerLogic";
 import Door from "./components/SceneComp/Door";
 import LightSwitch from "./components/SceneComp/LightSwitch";
 import OutsideSetup from "./components/SceneComp/OutsideSetup";
+import CorkBoard from "./components/SceneComp/CorkBoard";
 
 export default function SceneCanvas() {
   const [modalContent, setModalContent] = useState(null);
@@ -146,6 +147,7 @@ export default function SceneCanvas() {
           <ShelfSetup setModalContent={setModalContent} />
           {/* Wall */}
           <WallSetup />
+          <CorkBoard setModalContent={setModalContent} />
           {/* Outside */}
           <OutsideSetup />
 

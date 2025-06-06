@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 
 export default function MonitorScreen({
@@ -7,19 +7,29 @@ export default function MonitorScreen({
   size = [1.8, 1],
   imageUrl,
 }) {
-  const texture = useMemo(() => {
+  const [texture, setTexture] = useState(null);
+
+  useEffect(() => {
     const loader = new THREE.TextureLoader();
-    const tex = loader.load(imageUrl);
-    tex.encoding = THREE.sRGBEncoding;
-    return tex;
+    loader.load(
+      imageUrl,
+      (loadedTexture) => {
+        loadedTexture.encoding = THREE.sRGBEncoding;
+        setTexture(loadedTexture);
+      },
+      undefined,
+      (err) => console.error("Texture load error:", err)
+    );
   }, [imageUrl]);
 
   const radRotation = rotation.map((deg) => (deg * Math.PI) / 180);
 
+  if (!texture) return null;
+
   return (
-    <mesh position={position} rotation={radRotation}>
+    <mesh position={position} rotation={radRotation} renderOrder={1}>
       <planeGeometry args={size} />
-      <meshBasicMaterial map={texture} toneMapped={false} />
+      <meshBasicMaterial map={texture} toneMapped={false} depthWrite={false} />
     </mesh>
   );
 }
