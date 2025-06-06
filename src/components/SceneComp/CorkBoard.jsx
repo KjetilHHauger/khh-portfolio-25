@@ -83,15 +83,15 @@ export default function CorkBoard({ setModalContent }) {
             <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
               <h2 className="text-2xl font-bold text-center">Shopping List</h2>
               <ul className="text-left text-sm text-gray-700 leading-relaxed list-disc list-inside">
-                <li>Bananas</li>
-                <li>Milk</li>
+                <li>LEGO Disney Pixar Luxo Jr.</li>
+                <li>Nike Air Max Dn x LEGO®</li>
                 <li>Instant noodles</li>
-                <li>Cheese</li>
+                <li>AMD Ryzen 9 5900XT</li>
                 <li>Toilet paper</li>
                 <li>Grandiosa</li>
+                <li>Onyx Boox Go Color 7"</li>
                 <li>Pepsi max</li>
-                <li>Burger</li>
-                <li>Egg</li>
+                <li>Trek Powerfly 4 Gen 5</li>
               </ul>
             </div>
           )
