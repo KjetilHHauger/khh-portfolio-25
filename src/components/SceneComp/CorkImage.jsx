@@ -43,7 +43,7 @@ export default function CorkImage({
             <img
               src={imageUrl}
               alt="Pinned image"
-              className="rounded shadow max-w-full mx-auto"
+              className="rounded max-w-full mx-auto"
             />
           </div>
         );

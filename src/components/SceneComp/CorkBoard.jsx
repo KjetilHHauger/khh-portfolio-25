@@ -81,16 +81,18 @@ export default function CorkBoard({ setModalContent }) {
         onClick={() =>
           setModalContent(
             <div className="flex flex-col items-center w-full max-w-md mx-auto text-center gap-4">
-              <h2 className="text-2xl font-bold text-center">Dummy text</h2>
-              <img
-                src="/images/LegoCollection.webp"
-                alt="Unopened LEGO box"
-                loading="lazy"
-                className="w-full rounded shadow-md"
-              />
-              <p className="text-sm text-left text-gray-700 leading-relaxed">
-                What to post?
-              </p>
+              <h2 className="text-2xl font-bold text-center">Shopping List</h2>
+              <ul className="text-left text-sm text-gray-700 leading-relaxed list-disc list-inside">
+                <li>Bananas</li>
+                <li>Milk</li>
+                <li>Instant noodles</li>
+                <li>Cheese</li>
+                <li>Toilet paper</li>
+                <li>Grandiosa</li>
+                <li>Pepsi max</li>
+                <li>Burger</li>
+                <li>Egg</li>
+              </ul>
             </div>
           )
         }

@@ -44,6 +44,8 @@ export default function SceneCanvas() {
   };
   const [lightsOn, setLightsOn] = useState(false);
   const { active, progress } = useProgress();
+  const [introOpen, setIntroOpen] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
 
   const sunPosition = useMemo(() => {
     const theta = Math.PI * 0.4;
@@ -57,13 +59,14 @@ export default function SceneCanvas() {
   }, []);
 
   useEffect(() => {
-    const canvas = document.querySelector("canvas");
-    const updateLock = () => {
-      setPointerLocked(document.pointerLockElement === canvas);
-    };
-    document.addEventListener("pointerlockchange", updateLock);
-    return () => document.removeEventListener("pointerlockchange", updateLock);
-  }, []);
+    if (!active) {
+      const timer = setTimeout(() => {
+        setShowIntro(true);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [active]);
 
   return (
     <>
@@ -176,6 +179,43 @@ export default function SceneCanvas() {
         modalContent={modalContent}
         setModalContent={setModalContent}
       />
+      {showIntro && introOpen && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white p-6 rounded shadow-lg max-w-md w-full text-black space-y-4 text-sm">
+            <h2 className="text-xl font-bold text-center">Welcome!</h2>
+
+            {isMobile ? (
+              <>
+                <p>Use the joystick on the bottom left to look around.</p>
+                <p>
+                  Use the arrow buttons on the bottom right to move
+                  forward/backward.
+                </p>
+                <p>Most things are interactive and clickable.</p>
+              </>
+            ) : (
+              <>
+                <p>
+                  Use <strong>WASD</strong> to move around.
+                </p>
+                <p>Use your mouse to look around.</p>
+                <p>Most things are interactive and clickable.</p>
+                <p>Click to lock the pointer and reenable camera movement.</p>
+              </>
+            )}
+
+            <button
+              onClick={() => {
+                setIntroOpen(false);
+                document.body.requestPointerLock?.();
+              }}
+              className="w-full py-2 bg-black text-white rounded hover:bg-gray-800 transition"
+            >
+              Got it!
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
